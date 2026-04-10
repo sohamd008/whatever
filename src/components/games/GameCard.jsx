@@ -7,14 +7,25 @@ const GameCard = ({ game }) => {
   const content = (
     <div className={`relative flex flex-col h-full rounded-2xl overflow-hidden group bg-surface border border-white/5 transition-all duration-300 hover:-translate-y-2 hover:border-primary/50 hover:shadow-elevation ${game.featured ? 'col-span-1 md:col-span-2 lg:col-span-2 shadow-elevation border-primary/30' : ''}`}>
       
-      {/* Thumbnail */}
-      <div className="relative h-48 w-full overflow-hidden bg-black">
+      {/* Art Background */}
+      <div className="relative h-48 w-full overflow-hidden bg-black flex items-center justify-center">
         <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent z-10"></div>
-        <img 
-          src={game.thumbnail} 
-          alt={game.title}
-          className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-        />
+        
+        {game.svgArt ? (
+          <div 
+            className="w-full h-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+            style={{ 
+              filter: `drop-shadow(0 0 10px ${game.color || '#F7931A'}33)`
+            }}
+            dangerouslySetInnerHTML={{ __html: game.svgArt }}
+          />
+        ) : (
+          <img 
+            src={game.thumbnail} 
+            alt={game.title}
+            className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+          />
+        )}
         
         {/* Tags */}
         <div className="absolute top-4 left-4 z-20 flex flex-wrap gap-2">
