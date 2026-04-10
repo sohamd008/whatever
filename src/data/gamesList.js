@@ -63,4 +63,16 @@ export const gamesList = [
     tags: ["Strategy", "Classic", "AI Mode"],
     color: "#06b6d4"
   },
+  {
+    id: "snake",
+    title: "Snake",
+    developer: "Soham Dandekar",
+    type: "custom",
+    path: "/games/snake",
+    thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80",
+    svgArt: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#030304"/><rect x="40" y="40" width="10" height="10" fill="#06b6d4" opacity="0.8"/><rect x="50" y="40" width="10" height="10" fill="#06b6d4" opacity="0.7"/><rect x="60" y="40" width="10" height="10" fill="#06b6d4" opacity="0.6"/><rect x="70" y="40" width="10" height="10" fill="#06b6d4" opacity="0.5"/><rect x="80" y="40" width="10" height="10" fill="#06b6d4" opacity="0.4"/><rect x="140" y="100" width="10" height="10" fill="#F7931A" opacity="0.9"/></svg>`,
+    description: "The classic arcade game. Watch the AI hunt down every bit of data with perfect precision.",
+    tags: ["Classic", "Arcade", "AI Mode"],
+    color: "#06b6d4"
+  },
 ];

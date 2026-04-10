@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Snake from '../../games/Snake.jsx';
+---
+<Layout title="Soham's Arcade | Snake" pathname="/games/snake" hideHeaderFooter={true}>
+  <Snake client:only="react" />
+</Layout>
