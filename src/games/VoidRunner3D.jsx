@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 // Removing OrbitControls entirely since this is now an active game
-import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import * as THREE from 'three';
 
@@ -202,9 +201,9 @@ export default function VoidRunner3D() {
   return (
     <div ref={containerRef} className="w-full h-screen bg-black relative touch-none select-none">
       <div className="absolute top-8 left-8 z-50">
-        <Link to="/games" className="inline-flex items-center gap-2 text-white/50 hover:text-primary transition-colors font-mono uppercase text-sm tracking-wider bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
+        <a href="/games" className="inline-flex items-center gap-2 text-white/50 hover:text-primary transition-colors font-mono uppercase text-sm tracking-wider bg-black/40 px-4 py-2 rounded-full border border-white/10 backdrop-blur-md">
           <ArrowLeft className="w-4 h-4" /> Exit Simulation
-        </Link>
+        </a>
       </div>
       
       <div className="absolute top-8 right-8 z-50 font-mono text-right pointer-events-none">

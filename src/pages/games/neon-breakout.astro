@@ -1,0 +1,8 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import NeonBreakout from '../../games/NeonBreakout.jsx';
+---
+
+<Layout title="Soham's Arcade | Neon Breakout" pathname="/games/neon-breakout" hideHeaderFooter={true}>
+  <NeonBreakout client:only="react" />
+</Layout>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Gamepad2, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const GameCard = ({ game }) => {
   const isCustom = game.type === 'custom';
@@ -60,7 +59,7 @@ const GameCard = ({ game }) => {
   );
 
   if (isCustom) {
-    return <Link to={game.path} className="block h-full">{content}</Link>;
+    return <a href={game.path} className="block h-full">{content}</a>;
   }
 
   // Embedded games open in a new tab for this basic implementation 

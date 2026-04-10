@@ -1,0 +1,58 @@
+---
+import '../index.css';
+import ConstellationBackground from '../components/ConstellationBackground';
+
+const { title = "Soham's Website", pathname = "/", hideHeaderFooter = false } = Astro.props;
+const currentYear = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content="Soham Dandekar's personal portfolio, featuring web experiments, games, and web design." />
+  </head>
+  <body>
+    <div class="relative min-h-screen selection:bg-primary/30 selection:text-white bg-background text-foreground">
+      <ConstellationBackground client:load />
+      
+      <div class="relative z-10 antialiased font-body flex flex-col min-h-screen">
+        
+        {!hideHeaderFooter && (
+          <header class="container mx-auto max-w-7xl px-6 py-8 flex justify-between items-center bg-transparent relative z-50">
+            <a href="/" class="font-heading font-bold text-2xl tracking-tighter text-white hover:opacity-80 transition-opacity">
+              SD<span class="text-primary">.</span>
+            </a>
+            <nav class="flex gap-6 md:gap-8 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
+              {pathname === "/" ? (
+                <>
+                  <a href="#projects" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">PROJECTS</a>
+                  <a href="#contact" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">CONTACT</a>
+                </>
+              ) : null}
+              <a href="/games" class="text-xs md:text-sm font-mono tracking-wider text-primary font-bold hover:text-tertiary transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                ARCADE
+              </a>
+            </nav>
+          </header>
+        )}
+
+        {/* Page Content injected here */}
+        <slot />
+        
+        {!hideHeaderFooter && (
+          <footer class="mt-auto border-t border-white/10 bg-[#030304]/80 backdrop-blur-md py-8 relative z-50">
+            <div class="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center text-sm font-mono text-muted">
+              <p> &copy; {currentYear} Soham Dandekar. All rights reserved.</p>
+              <p class="mt-2 md:mt-0">Engineered with precision.</p>
+            </div>
+          </footer>
+        )}
+      </div>
+    </div>
+  </body>
+</html>

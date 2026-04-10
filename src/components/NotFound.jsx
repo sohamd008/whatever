@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Button from '../components/ui/Button';
 
 const NotFound = () => {
@@ -39,7 +38,7 @@ const NotFound = () => {
 
       {/* Button with funny hover effect */}
       <div className="relative inline-block">
-        <Button as={Link} to="/" variant="primary" className="mx-auto flex relative z-20">
+        <Button href="/" variant="primary" className="mx-auto flex relative z-20">
           RETURN TO BASE
         </Button>
       </div>
