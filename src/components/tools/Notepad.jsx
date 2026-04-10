@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Save, Trash2, FileText, Download, Plus, List, Eye, Edit3, ChevronRight } from 'lucide-react';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 
 const Notepad = () => {
   const [notes, setNotes] = useState([{ id: 1, title: 'First Note', content: '', lastSaved: Date.now() }]);
@@ -117,7 +118,7 @@ const Notepad = () => {
             {isPreview ? (
                 <div 
                     className="flex-grow p-6 overflow-y-auto prose prose-invert prose-sm font-body text-white/80 max-w-none prose-headings:text-primary prose-a:text-tertiary"
-                    dangerouslySetInnerHTML={{ __html: marked(activeNote.content || '_No content yet_') }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(marked(activeNote.content || '_No content yet_')) }}
                 />
             ) : (
                 <textarea

@@ -1,8 +1,8 @@
 export async function onRequest({ request, env }) {
   const authHeader = request.headers.get('x-terminal-auth');
-  const serverPass = env.TERMINAL_PASS || 'default_unset_pass'; // Should be set in Cloudflare Dashboard
+  const serverPass = env.TERMINAL_PASS;
 
-  if (authHeader !== serverPass) {
+  if (!serverPass || authHeader !== serverPass) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), { 
       status: 401,
       headers: { 'Content-Type': 'application/json' }
