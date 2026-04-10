@@ -44,12 +44,34 @@ export default function Snake() {
 
     const onKey = (e) => {
       if (autoRef.current) return;
-      if (e.code === 'ArrowUp' && dy === 0) { nextDx = 0; nextDy = -1; }
-      if (e.code === 'ArrowDown' && dy === 0) { nextDx = 0; nextDy = 1; }
-      if (e.code === 'ArrowLeft' && dx === 0) { nextDx = -1; nextDy = 0; }
-      if (e.code === 'ArrowRight' && dx === 0) { nextDx = 1; nextDy = 0; }
+      if ((e.code === 'ArrowUp' || e.code === 'KeyW') && dy === 0) { nextDx = 0; nextDy = -1; }
+      if ((e.code === 'ArrowDown' || e.code === 'KeyS') && dy === 0) { nextDx = 0; nextDy = 1; }
+      if ((e.code === 'ArrowLeft' || e.code === 'KeyA') && dx === 0) { nextDx = -1; nextDy = 0; }
+      if ((e.code === 'ArrowRight' || e.code === 'KeyD') && dx === 0) { nextDx = 1; nextDy = 0; }
     };
     window.addEventListener('keydown', onKey);
+
+    // Touch Swipes
+    let sx = 0, sy = 0;
+    const onStart = (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; };
+    const onEnd = (e) => {
+      if (autoRef.current) return;
+      const dx_ = e.changedTouches[0].clientX - sx;
+      const dy_ = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx_) > Math.abs(dy_)) {
+        if (Math.abs(dx_) > 30) {
+           if (dx_ > 0 && dx === 0) { nextDx = 1; nextDy = 0; }
+           else if (dx_ < 0 && dx === 0) { nextDx = -1; nextDy = 0; }
+        }
+      } else {
+        if (Math.abs(dy_) > 30) {
+           if (dy_ > 0 && dy === 0) { nextDx = 0; nextDy = 1; }
+           else if (dy_ < 0 && dy === 0) { nextDx = 0; nextDy = -1; }
+        }
+      }
+    };
+    window.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchend', onEnd);
 
     function aiMove() {
       const head = snake[0];
@@ -165,7 +187,7 @@ export default function Snake() {
 
       <div className="mb-4 text-center">
         <h1 className="text-3xl font-bold font-heading text-white">Sna<span className="text-primary">ke</span></h1>
-        <p className="text-white/30 text-xs font-mono mt-1">Arrow keys to move · Watch the AI chase the code</p>
+        <p className="text-white/30 text-xs font-mono mt-1">WASD / Arrows / Swipe to move · Watch the AI chase the code</p>
       </div>
 
       <div className="mb-4">

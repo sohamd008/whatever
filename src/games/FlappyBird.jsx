@@ -38,11 +38,15 @@ export default function FlappyBird() {
 
     const flap = () => { if (!dead) bird.vy = flapStrength; };
 
-    const onKey = (e) => { if (e.code === 'Space' || e.code === 'ArrowUp') { e.preventDefault(); flap(); } };
+    const onKey = (e) => { 
+      if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') { 
+        e.preventDefault(); flap(); 
+      } 
+    };
     const onTouch = (e) => { e.preventDefault(); flap(); };
     window.addEventListener('keydown', onKey);
-    canvas.addEventListener('touchstart', onTouch, { passive: false });
-    canvas.addEventListener('mousedown', flap);
+    window.addEventListener('touchstart', onTouch, { passive: false });
+    window.addEventListener('mousedown', flap);
 
     function spawnPipe() {
       const minTop = 60;

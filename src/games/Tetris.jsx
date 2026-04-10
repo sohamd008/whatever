@@ -194,9 +194,17 @@ export default function Tetris() {
 
       // Manual movement
       if (!autoRef.current && piece) {
-        if (keys['ArrowLeft'] || keys['KeyA']) { if (fits(board, piece.shape, px - 1, py)) px--; keys['ArrowLeft'] = false; keys['KeyA'] = false; }
-        if (keys['ArrowRight'] || keys['KeyD']) { if (fits(board, piece.shape, px + 1, py)) px++; keys['ArrowRight'] = false; keys['KeyD'] = false; }
-        if (keys['ArrowDown'] || keys['KeyS']) { if (fits(board, piece.shape, px, py + 1)) py++; }
+        if (keys['ArrowLeft'] || keys['KeyA']) { 
+          if (fits(board, piece.shape, px - 1, py)) px--; 
+          keys['ArrowLeft'] = false; keys['KeyA'] = false; 
+        }
+        if (keys['ArrowRight'] || keys['KeyD']) { 
+          if (fits(board, piece.shape, px + 1, py)) px++; 
+          keys['ArrowRight'] = false; keys['KeyD'] = false; 
+        }
+        if (keys['ArrowDown'] || keys['KeyS']) { 
+          if (fits(board, piece.shape, px, py + 1)) py++; 
+        }
       }
 
       // AI control
