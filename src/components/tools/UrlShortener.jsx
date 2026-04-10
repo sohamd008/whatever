@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link2, Copy, Check, Zap, MapPin } from 'lucide-react';
+import { Link2, Copy, Check, Zap } from 'lucide-react';
 
 const UrlShortener = () => {
   const [url, setUrl] = useState('');

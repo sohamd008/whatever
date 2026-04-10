@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, ChevronRight, Trash2, ExternalLink, Hash, Globe, RefreshCcw, Lock } from 'lucide-react';
+import { Shield, Trash2, ExternalLink, Hash, Globe, RefreshCcw, Lock } from 'lucide-react';
 
 const TerminalManager = () => {
   const [auth, setAuth] = useState(null);

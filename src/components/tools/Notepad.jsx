@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
-  Save, Trash2, Download, Plus, List, Eye, Edit3, 
-  ChevronRight, Pin, PinOff, Palette, FileJson, 
-  Upload, Wifi, WifiOff, MoreVertical, X, Check
+  Trash2, Download, Plus, List, Eye, Edit3, 
+  Pin, PinOff, Palette, 
+  Upload, Wifi, WifiOff, MoreVertical, Check
 } from 'lucide-react';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';

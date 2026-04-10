@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlignLeft, Copy, Check, Trash2, Maximize2 } from 'lucide-react';
+import { AlignLeft, Copy, Check, Trash2 } from 'lucide-react';
 
 const JsonFormatter = () => {
   const [input, setInput] = useState('');

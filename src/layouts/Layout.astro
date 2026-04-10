@@ -13,6 +13,47 @@ const currentYear = new Date().getFullYear();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content="Precision engineering meets interactive design. Explore Soham Dandekar's portfolio of web tools, arcade games, and digital archives." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content="Explore Soham Dandekar's interactive portfolio of custom-built tools, retro games, and digital archives." />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content="Explore Soham Dandekar's interactive portfolio of custom-built tools, retro games, and digital archives." />
+    <meta property="twitter:image" content="/og-image.png" />
+
+    <!-- JSON-LD Structured Data -->
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Soham Dandekar",
+        "url": "https://sohamdandekar.me",
+        "jobTitle": "Developer",
+        "knowsAbout": ["Web Development", "React", "Astro", "Game Design"],
+        "sameAs": [
+          "https://github.com/sohamd008"
+        ]
+      }
+    </script>
+    
     <script is:inline>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
@@ -20,8 +61,6 @@ const currentYear = new Date().getFullYear();
         });
       }
     </script>
-    <title>{title}</title>
-    <meta name="description" content="Soham Dandekar's personal portfolio, featuring web experiments, games, and web design." />
   </head>
   <body>
     <div class="relative min-h-screen selection:bg-primary/30 selection:text-white bg-background text-foreground">

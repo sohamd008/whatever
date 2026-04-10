@@ -11,7 +11,7 @@ export default {
         background: "#030304",
         surface: "#0F1115",
         foreground: "#FFFFFF",
-        muted: "#94A3B8",
+        muted: "#CBD5E1",
         border: "#1E293B",
         primary: "#F7931A", // Bitcoin Orange
         secondary: "#EA580C", // Burnt Orange
