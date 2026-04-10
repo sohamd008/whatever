@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
-      <main className="flex-grow flex flex-col items-center justify-center container mx-auto max-w-7xl px-6 py-24 text-center">
+      <main className="flex-grow flex flex-col items-center justify-center container mx-auto max-w-7xl px-6 py-24 text-center animate-fadeInUp">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 mb-8 animate-float">
             <span className="w-2 h-2 rounded-full bg-primary animate-ping block absolute"></span>
             <span className="w-2 h-2 rounded-full bg-primary block relative z-10"></span>
@@ -41,7 +41,7 @@ const Home = () => {
       </main>
 
       {/* Projects Section */}
-      <section id="projects" className="container mx-auto max-w-7xl px-6 py-24">
+      <section id="projects" className="container mx-auto max-w-7xl px-6 py-24 animate-fadeInUp" style={{ animationDelay: '0.2s', opacity: 0 }}>
         <div className="mb-12">
           <h2 className="font-heading font-bold text-3xl md:text-5xl text-white mb-4">
             Featured <span className="text-primary">Work</span>
@@ -85,7 +85,7 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="container mx-auto max-w-7xl px-6 py-24 mb-12">
+      <section id="contact" className="container mx-auto max-w-7xl px-6 py-24 mb-12 animate-fadeInUp" style={{ animationDelay: '0.4s', opacity: 0 }}>
         <Card glass className="text-center py-16 max-w-4xl mx-auto relative overflow-hidden group shadow-elevation">
             {/* Gradient glow behind the content */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] -z-10 group-hover:bg-primary/20 transition-all duration-700"></div>

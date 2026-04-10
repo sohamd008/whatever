@@ -4,7 +4,7 @@ import GameCard from '../components/games/GameCard';
 
 const Games = () => {
   return (
-    <main className="flex-grow flex flex-col py-24">
+    <main className="flex-grow flex flex-col py-24 animate-fadeInUp">
       <div className="container mx-auto max-w-7xl px-6 mb-16 text-center">
         <h1 className="font-heading font-extrabold text-5xl md:text-7xl text-white mb-6">
           The <span className="bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent text-glow">Arcade</span>
