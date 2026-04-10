@@ -64,6 +64,30 @@ const TerminalManager = () => {
     }
   };
 
+  const deleteAllLinks = async () => {
+    if (!window.confirm("CRITICAL: Wipe ALL links from the database?")) return;
+    if (!window.confirm("ARE YOU ABSOLUTELY SURE? This cannot be undone.")) return;
+    
+    setLoading(true);
+    try {
+      const resp = await fetch('/api/links', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'x-terminal-auth': auth 
+        },
+        body: JSON.stringify({ action: 'clear' })
+      });
+      if (resp.ok) {
+        setLinks([]);
+      }
+    } catch (e) {
+      alert('Wipe failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!auth) {
     return (
       <div className="max-w-md mx-auto mt-20 p-8 border border-green-900/40 bg-green-900/5 rounded-2xl backdrop-blur-md">
@@ -102,12 +126,20 @@ const TerminalManager = () => {
             <h1 className="text-2xl font-bold text-green-400 tracking-tighter">LINK_DATABASE_CONTROL</h1>
             <p className="text-[10px] text-green-500/40 uppercase tracking-widest mt-1">Found {links.length} active data pointers</p>
         </div>
-        <button 
-          onClick={() => fetchLinks(auth)}
-          className="p-2 hover:bg-green-500/10 rounded-lg text-green-500 transition-all flex items-center gap-2"
-        >
-            <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
-        </button>
+        <div className="flex items-center gap-4">
+            <button 
+                onClick={deleteAllLinks}
+                className="px-4 py-2 border border-red-500/20 text-red-500/40 hover:text-red-500 hover:bg-red-500/10 rounded-lg text-[10px] font-mono tracking-widest uppercase transition-all"
+            >
+                Wipe All
+            </button>
+            <button 
+            onClick={() => fetchLinks(auth)}
+            className="p-2 hover:bg-green-500/10 rounded-lg text-green-500 transition-all flex items-center gap-2"
+            >
+                <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+            </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-3">

@@ -36,6 +36,13 @@ export async function onRequest({ request, env }) {
           headers: { 'Content-Type': 'application/json' }
         });
       }
+      if (action === 'clear') {
+        const list = await env.LINKS.list();
+        await Promise.all(list.keys.map(k => env.LINKS.delete(k.name)));
+        return new Response(JSON.stringify({ success: true }), {
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
       return new Response(JSON.stringify({ error: 'Invalid action' }), { status: 400 });
     } catch (err) {
       return new Response(JSON.stringify({ error: err.message }), { status: 500 });
