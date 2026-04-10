@@ -37,9 +37,23 @@ export async function onRequest({ request, env }) {
         });
       }
       if (action === 'clear') {
-        const list = await env.LINKS.list();
-        await Promise.all(list.keys.map(k => env.LINKS.delete(k.name)));
-        return new Response(JSON.stringify({ success: true }), {
+        let list = await env.LINKS.list();
+        
+        // Handle empty or missing keys gracefully
+        if (!list.keys || list.keys.length === 0) {
+          return new Response(JSON.stringify({ success: true, count: 0 }), {
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+
+        // Use sequential or chunked deletion to stay within sub-request limits (max 50)
+        let deletedCount = 0;
+        for (const k of list.keys) {
+          await env.LINKS.delete(k.name);
+          deletedCount++;
+        }
+
+        return new Response(JSON.stringify({ success: true, count: deletedCount }), {
           headers: { 'Content-Type': 'application/json' }
         });
       }
