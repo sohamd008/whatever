@@ -140,7 +140,7 @@ const SortableNoteItem = ({ note, isActive, onClick, onDelete, onPin, onColorCha
 
 // --- Main Component ---
 const Notepad = () => {
-  const [notes, setNotes] = useState([{ id: 'init', title: 'Void Workspace', content: '# Welcome to Neonote\n\n- **Offline First** using localStorage\n- **Material 3** Aesthetics\n- **Markdown** Support\n- **Drag & Drop** Reordering', lastSaved: Date.now(), pinned: false, color: '#F7931A' }]);
+  const [notes, setNotes] = useState([{ id: 'init', title: 'Start Typing...', content: '# Welcome to the Workspace\n\n- **Auto-Saving** to local storage\n- **Markdown** rendering enabled\n- **Drag & Drop** to reorder fragments\n- **Pin** important items to the top', lastSaved: Date.now(), pinned: false, color: '#F7931A' }]);
   const [activeId, setActiveId] = useState('init');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
@@ -165,7 +165,7 @@ const Notepad = () => {
 
   // Initialize from storage
   useEffect(() => {
-    const saved = localStorage.getItem('neonote_v1');
+    const saved = localStorage.getItem('voidnotes_v1') || localStorage.getItem('neonote_v1');
     if (saved) {
       const parsed = JSON.parse(saved);
       if (parsed.length > 0) {
@@ -177,7 +177,7 @@ const Notepad = () => {
 
   // Save to storage
   useEffect(() => {
-    localStorage.setItem('neonote_v1', JSON.stringify(notes));
+    localStorage.setItem('voidnotes_v1', JSON.stringify(notes));
   }, [notes]);
 
   const activeNote = notes.find(n => n.id === activeId) || notes[0];
@@ -221,7 +221,7 @@ const Notepad = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `neonote_backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.download = `notes_backup_${new Date().toISOString().slice(0,10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
