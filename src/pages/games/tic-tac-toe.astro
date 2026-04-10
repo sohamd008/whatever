@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TicTacToe from '../../games/TicTacToe.jsx';
+---
+<Layout title="Soham's Arcade | Tic Tac Toe" pathname="/games/tic-tac-toe" hideHeaderFooter={true}>
+  <TicTacToe client:only="react" />
+</Layout>

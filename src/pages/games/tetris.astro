@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Tetris from '../../games/Tetris.jsx';
+---
+<Layout title="Soham's Arcade | Tetris" pathname="/games/tetris" hideHeaderFooter={true}>
+  <Tetris client:only="react" />
+</Layout>

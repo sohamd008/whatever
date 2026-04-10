@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FlappyBird from '../../games/FlappyBird.jsx';
+---
+<Layout title="Soham's Arcade | Flappy Bird" pathname="/games/flappy-bird" hideHeaderFooter={true}>
+  <FlappyBird client:only="react" />
+</Layout>

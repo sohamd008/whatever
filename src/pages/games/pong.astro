@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PongAI from '../../games/PongAI.jsx';
+---
+<Layout title="Soham's Arcade | Pong vs AI" pathname="/games/pong" hideHeaderFooter={true}>
+  <PongAI client:only="react" />
+</Layout>

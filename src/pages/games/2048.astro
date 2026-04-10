@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Game2048 from '../../games/Game2048.jsx';
+---
+<Layout title="Soham's Arcade | 2048" pathname="/games/2048" hideHeaderFooter={true}>
+  <Game2048 client:only="react" />
+</Layout>
