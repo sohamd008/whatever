@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://sohamdandekar.me', // Update with your actual domain
+  site: 'https://soham.eu.cc', // Matches the live domain in the audit report
   integrations: [react(), sitemap()],
   devToolbar: {
     enabled: false
