@@ -3,20 +3,14 @@ import { Link } from 'react-router-dom';
 import Button from '../components/ui/Button';
 
 const NotFound = () => {
-  const [debris, setDebris] = useState([]);
-
-  useEffect(() => {
-    // Generate random code debris locations on mount
-    const newDebris = Array.from({ length: 8 }).map(() => ({
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 20 + 10,
-      delay: Math.random() * 5,
-      speed: Math.random() * 10 + 10,
-      text: ['404', 'null', 'undefined', 'NaN', 'Object Promise'][Math.floor(Math.random() * 5)]
-    }));
-    setDebris(newDebris);
-  }, []);
+  const [debris] = useState(() => Array.from({ length: 8 }).map(() => ({
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 20 + 10,
+    delay: Math.random() * 5,
+    speed: Math.random() * 10 + 10,
+    text: ['404', 'null', 'undefined', 'NaN', 'Object Promise'][Math.floor(Math.random() * 5)]
+  })));
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden z-10 min-h-[70vh]">
@@ -67,11 +61,11 @@ const NotFound = () => {
              key={i}
              className="absolute text-white/10 font-mono font-bold whitespace-nowrap"
              style={{
-               left: \`\${item.x}%\`,
-               bottom: \`-20%\`,
-               fontSize: \`\${item.size}px\`,
-               animation: \`floatUp \${item.speed}s linear infinite\`,
-               animationDelay: \`\${item.delay}s\`
+               left: `${item.x}%`,
+               bottom: `-20%`,
+               fontSize: `${item.size}px`,
+               animation: `floatUp ${item.speed}s linear infinite`,
+               animationDelay: `${item.delay}s`
              }}
            >
              {item.text}

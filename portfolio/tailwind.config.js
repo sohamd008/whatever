@@ -1,4 +1,3 @@
-import path from "path";
 
 /** @type {import('tailwindcss').Config} */
 export default {

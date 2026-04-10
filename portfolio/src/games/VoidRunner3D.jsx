@@ -51,7 +51,7 @@ const Obstacles = ({ setGameOver }) => {
   const count = 15;
   const dummy = useMemo(() => new THREE.Object3D(), []);
   
-  const obstacles = useMemo(() => {
+  const [obstacles] = useState(() => {
     return new Array(count).fill().map(() => ({
       position: new THREE.Vector3(
         (Math.random() - 0.5) * 8, 
@@ -60,7 +60,7 @@ const Obstacles = ({ setGameOver }) => {
       ),
       rotation: new THREE.Vector3(Math.random(), Math.random(), Math.random())
     }));
-  }, [count]);
+  });
 
   useFrame(() => {
     if (gameState.gameOver || !meshRef.current) return;

@@ -13,10 +13,13 @@ const ConstellationBackground = () => {
     let lastMouse = { x: -9999, y: -9999 };
     let animationFrameId;
     
+    // Mobile Detection
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
     // ENHANCED PARAMETERS
-    const NODE_COUNT = 600; // Doubled density with new optimizations
-    const ATTRACT_RADIUS = 150; 
-    const CONNECT_DIST = 110;    
+    const NODE_COUNT = isMobile ? 120 : 600; // Lower density on mobile for optimization
+    const ATTRACT_RADIUS = isMobile ? 100 : 150; 
+    const CONNECT_DIST = isMobile ? 80 : 110;    
 
     function resize() {
       const oldW = W || window.innerWidth;
@@ -127,7 +130,7 @@ const ConstellationBackground = () => {
         this.delay = Math.random() * 200 + 50; // frames before starting
       }
 
-      update(time) {
+      update() {
         if (!this.active) {
           this.delay--;
           if (this.delay <= 0) this.active = true;
@@ -172,7 +175,7 @@ const ConstellationBackground = () => {
 
     function initNodes() {
       nodes = Array.from({ length: NODE_COUNT }, () => new Node());
-      shootingStars = Array.from({ length: 4 }, () => new ShootingStar());
+      shootingStars = Array.from({ length: isMobile ? 1 : 4 }, () => new ShootingStar());
     }
 
     function drawConnections() {
@@ -255,6 +258,20 @@ const ConstellationBackground = () => {
       lastMouse.x = e.clientX;
       lastMouse.y = e.clientY;
     };
+
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        const touch = e.touches[0];
+        if (lastMouse.x !== -9999) {
+          mouse.vx = touch.clientX - lastMouse.x;
+          mouse.vy = touch.clientY - lastMouse.y;
+        }
+        mouse.x = touch.clientX;
+        mouse.y = touch.clientY;
+        lastMouse.x = touch.clientX;
+        lastMouse.y = touch.clientY;
+      }
+    };
     
     const handleMouseLeave = () => {
       mouse.x = -9999;
@@ -265,6 +282,10 @@ const ConstellationBackground = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('touchstart', handleTouchMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleMouseLeave);
+    window.addEventListener('touchcancel', handleMouseLeave);
     
     animate();
 
@@ -272,6 +293,10 @@ const ConstellationBackground = () => {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('touchstart', handleTouchMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleMouseLeave);
+      window.removeEventListener('touchcancel', handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
