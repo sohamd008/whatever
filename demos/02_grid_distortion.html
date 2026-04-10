@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demo 2: Grid Distortion</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #030304;
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  canvas {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 0;
+  }
+  .overlay {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    pointer-events: none;
+  }
+  h1 {
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  h1 span {
+    background: linear-gradient(to right, #F7931A, #FFD600);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  p {
+    font-family: 'JetBrains Mono', monospace;
+    color: #94A3B8;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .label {
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 10;
+    background: rgba(15,17,21,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: #F7931A;
+    letter-spacing: 0.1em;
+  }
+  .desc {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background: rgba(15,17,21,0.8);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    padding: 16px 28px;
+    border-radius: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: #94A3B8;
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="overlay">
+  <h1>Soham <span>Dandekar</span></h1>
+  <p>Move your mouse around</p>
+</div>
+<div class="label">02 — GRID DISTORTION</div>
+<div class="desc">
+  A precise geometric grid that warps and glows around your cursor. Grid intersections light up in Bitcoin orange, creating a "network node" activation effect. The grid snaps back smoothly when you move away.
+</div>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+let W, H;
+let mouse = { x: -9999, y: -9999 };
+const CELL = 40;
+const INFLUENCE = 200;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+function getDisplacement(x, y) {
+  const dx = x - mouse.x;
+  const dy = y - mouse.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist > INFLUENCE || dist === 0) return { ox: 0, oy: 0, factor: 0 };
+  const factor = Math.pow(1 - dist / INFLUENCE, 2);
+  const angle = Math.atan2(dy, dx);
+  const push = factor * 25;
+  return {
+    ox: Math.cos(angle) * push,
+    oy: Math.sin(angle) * push,
+    factor
+  };
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+
+  const cols = Math.ceil(W / CELL) + 2;
+  const rows = Math.ceil(H / CELL) + 2;
+  const offsetX = (W % CELL) / 2;
+  const offsetY = (H % CELL) / 2;
+
+  // Draw vertical lines
+  for (let c = 0; c <= cols; c++) {
+    ctx.beginPath();
+    for (let r = 0; r <= rows; r++) {
+      const baseX = offsetX + c * CELL;
+      const baseY = offsetY + r * CELL;
+      const { ox, oy, factor } = getDisplacement(baseX, baseY);
+      const x = baseX + ox;
+      const y = baseY + oy;
+      if (r === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(30, 41, 59, 0.4)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Draw horizontal lines
+  for (let r = 0; r <= rows; r++) {
+    ctx.beginPath();
+    for (let c = 0; c <= cols; c++) {
+      const baseX = offsetX + c * CELL;
+      const baseY = offsetY + r * CELL;
+      const { ox, oy } = getDisplacement(baseX, baseY);
+      const x = baseX + ox;
+      const y = baseY + oy;
+      if (c === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(30, 41, 59, 0.4)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+
+  // Draw intersection dots
+  for (let c = 0; c <= cols; c++) {
+    for (let r = 0; r <= rows; r++) {
+      const baseX = offsetX + c * CELL;
+      const baseY = offsetY + r * CELL;
+      const { ox, oy, factor } = getDisplacement(baseX, baseY);
+      if (factor > 0.05) {
+        const x = baseX + ox;
+        const y = baseY + oy;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.5 + factor * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(247, 147, 26, ${factor * 0.9})`;
+        ctx.fill();
+        // Glow
+        if (factor > 0.3) {
+          ctx.beginPath();
+          ctx.arc(x, y, 3 + factor * 10, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(247, 147, 26, ${factor * 0.12})`;
+          ctx.fill();
+        }
+      }
+    }
+  }
+
+  // Mouse glow
+  if (mouse.x > 0) {
+    const gradient = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, INFLUENCE);
+    gradient.addColorStop(0, 'rgba(247, 147, 26, 0.06)');
+    gradient.addColorStop(1, 'rgba(247, 147, 26, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>

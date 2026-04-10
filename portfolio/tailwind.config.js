@@ -1,0 +1,48 @@
+import path from "path";
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: "#030304",
+        surface: "#0F1115",
+        foreground: "#FFFFFF",
+        muted: "#94A3B8",
+        border: "#1E293B",
+        primary: "#F7931A", // Bitcoin Orange
+        secondary: "#EA580C", // Burnt Orange
+        tertiary: "#FFD600", // Digital Gold
+      },
+      fontFamily: {
+        heading: ["Space Grotesk", "sans-serif"],
+        body: ["Inter", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+      animation: {
+        float: "float 8s ease-in-out infinite",
+        spinSlow: "spin 10s linear infinite",
+        spinSlowReverse: "spin 15s linear infinite reverse",
+        bounceSlow: "bounce 3s infinite",
+        bounceSlower: "bounce 4s infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+      },
+      boxShadow: {
+        "orange-glow": "0 0 20px -5px rgba(234,88,12,0.5)",
+        "orange-glow-hover": "0 0 30px -5px rgba(247,147,26,0.6)",
+        "gold-glow": "0 0 20px rgba(255,214,0,0.3)",
+        "elevation": "0 0 50px -10px rgba(247,147,26,0.1)",
+      },
+    },
+  },
+  plugins: [],
+}
