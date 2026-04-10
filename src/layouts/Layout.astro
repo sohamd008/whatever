@@ -33,8 +33,11 @@ const currentYear = new Date().getFullYear();
                   <a href="#contact" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">CONTACT</a>
                 </>
               ) : null}
-              <a href="/games" class="text-xs md:text-sm font-mono tracking-wider text-primary font-bold hover:text-tertiary transition-colors flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+              <a href="/tools" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors flex items-center gap-2 ${pathname === "/tools" ? "text-primary font-bold" : "text-muted"}`}>
+                TOOLS
+              </a>
+              <a href="/games" class={`text-xs md:text-sm font-mono tracking-wider hover:text-tertiary transition-colors flex items-center gap-2 ${pathname === "/games" || pathname.startsWith("/games/") ? "text-tertiary font-bold" : "text-primary"}`}>
+                {pathname === "/games" || pathname.startsWith("/games/") ? null : <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>}
                 ARCADE
               </a>
             </nav>

@@ -1,0 +1,111 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Play, Pause, RotateCcw, Bell } from 'lucide-react';
+
+const Timer = () => {
+  const [minutes, setMinutes] = useState(5);
+  const [seconds, setSeconds] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [progress, setProgress] = useState(100);
+  const totalSecondsRef = useRef(300);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive && (minutes > 0 || seconds > 0)) {
+      interval = setInterval(() => {
+        if (seconds === 0) {
+          setMinutes(m => m - 1);
+          setSeconds(59);
+        } else {
+          setSeconds(s => s - 1);
+        }
+        
+        const remaining = (minutes * 60 + seconds) - 1;
+        setProgress((remaining / totalSecondsRef.current) * 100);
+      }, 1000);
+    } else if (minutes === 0 && seconds === 0) {
+      setIsActive(false);
+      clearInterval(interval);
+      // Play sound alert (using browser notification sound placeholder logic)
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isActive, minutes, seconds]);
+
+  const toggle = () => {
+    if (!isActive && minutes === 0 && seconds === 0) return;
+    if (!isActive && totalSecondsRef.current !== (minutes * 60 + seconds)) {
+        totalSecondsRef.current = minutes * 60 + seconds;
+    }
+    setIsActive(!isActive);
+  };
+
+  const reset = () => {
+    setIsActive(false);
+    setMinutes(5);
+    setSeconds(0);
+    setProgress(100);
+    totalSecondsRef.current = 300;
+  };
+
+  const adjustTime = (m) => {
+    if (isActive) return;
+    const newM = Math.max(0, Math.min(99, minutes + m));
+    setMinutes(newM);
+    totalSecondsRef.current = newM * 60 + seconds;
+  };
+
+  return (
+    <div className="p-6 bg-surface/50 backdrop-blur-sm rounded-2xl border border-white/5 h-full flex flex-col items-center justify-center">
+      <div className="relative w-32 h-32 flex items-center justify-center mb-6">
+        <svg className="w-full h-full transform -rotate-90">
+          <circle
+            cx="64" cy="64" r="60"
+            stroke="currentColor" strokeWidth="4" fill="transparent"
+            className="text-white/5"
+          />
+          <circle
+            cx="64" cy="64" r="60"
+            stroke="currentColor" strokeWidth="4" fill="transparent"
+            strokeDasharray={377}
+            strokeDashoffset={377 - (377 * progress) / 100}
+            className="text-primary transition-all duration-1000"
+          />
+        </svg>
+        <div className="absolute text-3xl font-mono font-bold text-white tracking-widest">
+          {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+        </div>
+      </div>
+
+      <div className="flex gap-4 mb-8">
+        <button 
+          onClick={() => adjustTime(-1)} 
+          disabled={isActive}
+          className="w-10 h-10 rounded-full bg-black/40 border border-white/5 text-muted hover:text-white hover:border-white/20 disabled:opacity-30 flex items-center justify-center"
+        >
+          -
+        </button>
+        <button 
+          onClick={toggle}
+          className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${isActive ? 'bg-orange-500/20 text-orange-500 hover:bg-orange-500/30 shadow-[0_0_15px_rgba(249,115,22,0.3)]' : 'bg-primary text-white hover:scale-105 shadow-[0_0_15px_rgba(247,147,26,0.5)]'}`}
+        >
+          {isActive ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6 pl-1" />}
+        </button>
+        <button 
+          onClick={() => adjustTime(1)} 
+          disabled={isActive}
+          className="w-10 h-10 rounded-full bg-black/40 border border-white/5 text-muted hover:text-white hover:border-white/20 disabled:opacity-30 flex items-center justify-center"
+        >
+          +
+        </button>
+      </div>
+
+      <button onClick={reset} className="text-[10px] font-mono uppercase tracking-widest text-muted hover:text-primary transition-colors flex items-center gap-2">
+        <RotateCcw className="w-3 h-3" /> Reset Timer
+      </button>
+    </div>
+  );
+};
+
+export default Timer;
