@@ -6,6 +6,7 @@ import Games from './pages/Games';
 import VoidRunner3D from './games/VoidRunner3D';
 import NeonBreakout from './games/NeonBreakout';
 import CryptoSnake from './games/CryptoSnake';
+import NotFound from './pages/NotFound';
 
 function App() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
           <Route path="/games/void-runner" element={<VoidRunner3D />} />
           <Route path="/games/neon-breakout" element={<NeonBreakout />} />
           <Route path="/games/snake" element={<CryptoSnake />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         
         {/* Footer (hidden inside game engines) */}
