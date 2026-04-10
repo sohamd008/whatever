@@ -1,6 +1,8 @@
-// 25 Games exactly as promised: 3 Custom, 22 Embedded HTML5 Games
+// 27 Games: 5 Custom-built (React/Canvas), 22 Curated External HTML5 games
 export const gamesList = [
-  // CUSTOM BUILT GAMES (React/Three)
+  // ─────────────────────────────────────────
+  // CUSTOM BUILT — Runs entirely on this site
+  // ─────────────────────────────────────────
   {
     id: "void-runner",
     title: "Void Runner 3D",
@@ -19,7 +21,7 @@ export const gamesList = [
     type: "custom",
     path: "/games/neon-breakout",
     thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80",
-    description: "Classic breakout with intense particle physics.",
+    description: "Classic breakout with intense particle physics and a glowing neon aesthetic.",
     tags: ["2D", "Arcade", "Physics"],
     featured: true
   },
@@ -30,10 +32,33 @@ export const gamesList = [
     type: "custom",
     path: "/games/snake",
     thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80",
-    description: "Navigate the chain and collect nodes.",
+    description: "Navigate the chain, collect nodes, don't eat yourself.",
     tags: ["Classic", "Logic"]
   },
-  // EMBEDDED CURATED GAMES
+  {
+    id: "pixel-asteroids",
+    title: "Pixel Asteroids",
+    developer: "Soham Dandekar",
+    type: "custom",
+    path: "/games/asteroids",
+    thumbnail: "https://images.unsplash.com/photo-1607499699372-7ac0a3571386?auto=format&fit=crop&w=400&q=80",
+    description: "Old-school vector asteroids with particle explosions and screen wrap.",
+    tags: ["Arcade", "Action"],
+    featured: true
+  },
+  {
+    id: "crypto-match",
+    title: "Crypto Match",
+    developer: "Soham Dandekar",
+    type: "custom",
+    path: "/games/memory-match",
+    thumbnail: "https://images.unsplash.com/photo-1629654297299-c8506221ca97?auto=format&fit=crop&w=400&q=80",
+    description: "Flip crypto symbol pairs in as few moves as possible. Can you get a perfect game?",
+    tags: ["Puzzle", "Memory"]
+  },
+  // ─────────────────────────────────────────
+  // CURATED — Opens in a new tab
+  // ─────────────────────────────────────────
   {
     id: "hextrix",
     title: "Hextrix",
@@ -53,16 +78,6 @@ export const gamesList = [
     thumbnail: "https://images.unsplash.com/photo-1580584473179-1ce556aa2a17?auto=format&fit=crop&w=400&q=80",
     description: "Math logic game. Join the numbers to reach 2048.",
     tags: ["Logic", "Classic"]
-  },
-  {
-    id: "astray",
-    title: "Astray",
-    developer: "Rye Terrell",
-    type: "embed",
-    url: "https://www.crazygames.com/embed/astray",
-    thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-    description: "A WebGL maze game.",
-    tags: ["3D", "Maze"]
   },
   {
     id: "slow-roads",
@@ -111,7 +126,7 @@ export const gamesList = [
     type: "embed",
     url: "https://phoboslab.org/xibalba/",
     thumbnail: "https://images.unsplash.com/photo-1498736297812-3a08021f206f?auto=format&fit=crop&w=400&q=80",
-    description: "A doom-clone first person shooter.",
+    description: "A doom-clone first person shooter in the browser.",
     tags: ["3D", "Shooter"]
   },
   {
@@ -141,18 +156,8 @@ export const gamesList = [
     type: "embed",
     url: "https://coreball.com/",
     thumbnail: "https://images.unsplash.com/photo-1554188248-986adbb56bed?auto=format&fit=crop&w=400&q=80",
-    description: "Precision timing game.",
+    description: "Precision timing game — stake pins without hitting others.",
     tags: ["Logic"]
-  },
-  {
-    id: "krunker",
-    title: "Krunker",
-    developer: "Yendis",
-    type: "embed",
-    url: "https://krunker.io/",
-    thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80",
-    description: "Multiplayer blocky FPS.",
-    tags: ["3D", "Multiplayer", "Shooter"]
   },
   {
     id: "z-type",
@@ -161,18 +166,8 @@ export const gamesList = [
     type: "embed",
     url: "https://zty.pe/",
     thumbnail: "https://images.unsplash.com/photo-1627398225255-3b0366ebcb94?auto=format&fit=crop&w=400&q=80",
-    description: "Type to shoot enemies.",
+    description: "Type to shoot enemies. The ultimate typing challenge.",
     tags: ["Typing", "Action"]
-  },
-  {
-    id: "polycraft",
-    title: "Polycraft",
-    developer: "Wonderstruck",
-    type: "embed",
-    url: "https://polycraftapp.com/",
-    thumbnail: "https://images.unsplash.com/photo-1601987077677-5346c0c57d3f?auto=format&fit=crop&w=400&q=80",
-    description: "3D survival and crafting game.",
-    tags: ["3D", "Strategy"]
   },
   {
     id: "entanglement",
@@ -181,28 +176,8 @@ export const gamesList = [
     type: "embed",
     url: "https://entanglement.gopherwoodstudios.com/",
     thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
-    description: "Hexagonal puzzle game.",
+    description: "Hexagonal tile puzzle. Create the longest possible path.",
     tags: ["Puzzle"]
-  },
-  {
-    id: "little-alchemy",
-    title: "Little Alchemy 2",
-    developer: "Recloak",
-    type: "embed",
-    url: "https://littlealchemy2.com/",
-    thumbnail: "https://images.unsplash.com/photo-1582046413488-66a96e57dbf5?auto=format&fit=crop&w=400&q=80",
-    description: "Combine elements to create new ones.",
-    tags: ["Simulation"]
-  },
-  {
-    id: "slope",
-    title: "Slope",
-    developer: "Y8",
-    type: "embed",
-    url: "https://slopegame.io/",
-    thumbnail: "https://images.unsplash.com/photo-1621360841013-c768310ba050?auto=format&fit=crop&w=400&q=80",
-    description: "Endless 3D rolling game.",
-    tags: ["3D", "Arcade"]
   },
   {
     id: "sandspiel",
@@ -211,18 +186,8 @@ export const gamesList = [
     type: "embed",
     url: "https://sandspiel.club/",
     thumbnail: "https://images.unsplash.com/photo-1550537687-c9a0c325cdef?auto=format&fit=crop&w=400&q=80",
-    description: "Falling sand cellular automata.",
+    description: "Falling sand cellular automata simulator.",
     tags: ["Simulation"]
-  },
-  {
-    id: "tetris",
-    title: "Tetris",
-    developer: "Alexey",
-    type: "embed",
-    url: "https://tetris.com/play-tetris",
-    thumbnail: "https://images.unsplash.com/photo-1601614777551-7f9e8a719fc7?auto=format&fit=crop&w=400&q=80",
-    description: "The classic block puzzle.",
-    tags: ["Classic", "Puzzle"]
   },
   {
     id: "run3",
@@ -231,7 +196,7 @@ export const gamesList = [
     type: "embed",
     url: "https://run3.io/",
     thumbnail: "https://images.unsplash.com/photo-1584444583196-857e2bb25867?auto=format&fit=crop&w=400&q=80",
-    description: "Run and jump through a space tunnel.",
+    description: "Run and jump through an infinite space tunnel.",
     tags: ["3D", "Arcade"]
   },
   {
@@ -241,7 +206,7 @@ export const gamesList = [
     type: "embed",
     url: "https://orteil.dashnet.org/cookieclicker/",
     thumbnail: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=400&q=80",
-    description: "The original idle game.",
+    description: "The original idle game. Bake cookies forever.",
     tags: ["Idle"]
   },
   {
@@ -251,7 +216,17 @@ export const gamesList = [
     type: "embed",
     url: "https://bouncingdvdlogo.com/",
     thumbnail: "https://images.unsplash.com/photo-1627993046777-622cd5a19cb2?auto=format&fit=crop&w=400&q=80",
-    description: "Will it hit the corner?",
+    description: "Will it hit the corner? The eternal question.",
     tags: ["Zen"]
-  }
+  },
+  {
+    id: "slope",
+    title: "Slope",
+    developer: "Y8",
+    type: "embed",
+    url: "https://slopegame.io/",
+    thumbnail: "https://images.unsplash.com/photo-1621360841013-c768310ba050?auto=format&fit=crop&w=400&q=80",
+    description: "Endless 3D ball rolling game. Survive as long as possible.",
+    tags: ["3D", "Arcade"]
+  },
 ];
