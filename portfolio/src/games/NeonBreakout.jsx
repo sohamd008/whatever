@@ -48,17 +48,29 @@ export default function NeonBreakout() {
     let animationFrameId;
 
     const keyDownHandler = (e) => {
-      if (e.key === "Right" || e.key === "ArrowRight") rightPressed = true;
-      else if (e.key === "Left" || e.key === "ArrowLeft") leftPressed = true;
+      if (e.key === "Right" || e.key === "ArrowRight" || e.key === "d" || e.key === "D") rightPressed = true;
+      else if (e.key === "Left" || e.key === "ArrowLeft" || e.key === "a" || e.key === "A") leftPressed = true;
     };
     
     const keyUpHandler = (e) => {
-      if (e.key === "Right" || e.key === "ArrowRight") rightPressed = false;
-      else if (e.key === "Left" || e.key === "ArrowLeft") leftPressed = false;
+      if (e.key === "Right" || e.key === "ArrowRight" || e.key === "d" || e.key === "D") rightPressed = false;
+      else if (e.key === "Left" || e.key === "ArrowLeft" || e.key === "a" || e.key === "A") leftPressed = false;
     };
     
     const mouseMoveHandler = (e) => {
-      const relativeX = e.clientX - canvas.getBoundingClientRect().left;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const relativeX = (e.clientX - rect.left) * scaleX;
+      if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
+      }
+    };
+    
+    const touchMoveHandler = (e) => {
+      e.preventDefault(); // prevent scroll
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const relativeX = (e.touches[0].clientX - rect.left) * scaleX;
       if (relativeX > 0 && relativeX < canvas.width) {
         paddleX = relativeX - paddleWidth / 2;
       }
@@ -67,6 +79,7 @@ export default function NeonBreakout() {
     window.addEventListener("keydown", keyDownHandler, false);
     window.addEventListener("keyup", keyUpHandler, false);
     canvas.addEventListener("mousemove", mouseMoveHandler, false);
+    canvas.addEventListener("touchmove", touchMoveHandler, { passive: false });
 
     const createExplosion = (ex, ey) => {
       for(let i=0; i<15; i++) {
@@ -220,6 +233,7 @@ export default function NeonBreakout() {
       window.removeEventListener("keydown", keyDownHandler);
       window.removeEventListener("keyup", keyUpHandler);
       canvas.removeEventListener("mousemove", mouseMoveHandler);
+      canvas.removeEventListener("touchmove", touchMoveHandler);
       cancelAnimationFrame(animationFrameId);
     };
   }, [gameOver, win]);
@@ -243,7 +257,7 @@ export default function NeonBreakout() {
           ref={canvasRef} 
           width={800} 
           height={600} 
-          className="bg-black rounded-xl border border-white/5 cursor-none"
+          className="bg-black rounded-xl border border-white/5 cursor-none w-full max-w-[800px] h-auto aspect-[4/3] touch-none"
         />
       </div>
 

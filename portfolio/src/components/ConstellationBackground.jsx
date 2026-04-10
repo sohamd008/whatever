@@ -14,7 +14,7 @@ const ConstellationBackground = () => {
     let animationFrameId;
     
     // ENHANCED PARAMETERS
-    const NODE_COUNT = 300; // Increased for a denser starfield
+    const NODE_COUNT = 600; // Doubled density with new optimizations
     const ATTRACT_RADIUS = 150; 
     const CONNECT_DIST = 110;    
 
@@ -176,21 +176,25 @@ const ConstellationBackground = () => {
     }
 
     function drawConnections() {
+      // Optimization: No Math.sqrt for filter check
+      const attractSquared = (ATTRACT_RADIUS * 1.5) * (ATTRACT_RADIUS * 1.5);
       const activeNodes = nodes.filter(n => {
         const dx = mouse.x - n.x;
         const dy = mouse.y - n.y;
-        return Math.sqrt(dx * dx + dy * dy) < ATTRACT_RADIUS * 1.5;
+        return (dx * dx + dy * dy) < attractSquared;
       });
 
       for (let i = 0; i < activeNodes.length; i++) {
+        const nodeA = activeNodes[i];
+        
         // Connect to mouse
-        const dmx = mouse.x - activeNodes[i].x;
-        const dmy = mouse.y - activeNodes[i].y;
-        const distM = Math.sqrt(dmx * dmx + dmy * dmy);
+        const dmx = mouse.x - nodeA.x;
+        const dmy = mouse.y - nodeA.y;
+        const distM = Math.sqrt(dmx * dmx + dmy * dmy); // Need actual distance for alpha
         if (distM < ATTRACT_RADIUS) {
           const alpha = (1 - distM / ATTRACT_RADIUS) * 0.2;
           ctx.beginPath();
-          ctx.moveTo(activeNodes[i].x, activeNodes[i].y);
+          ctx.moveTo(nodeA.x, nodeA.y);
           ctx.lineTo(mouse.x, mouse.y);
           ctx.strokeStyle = `rgba(255, 214, 0, ${alpha})`;
           ctx.lineWidth = 0.6;
@@ -199,14 +203,21 @@ const ConstellationBackground = () => {
 
         // Connect to each other
         for (let j = i + 1; j < activeNodes.length; j++) {
-          const dx = activeNodes[i].x - activeNodes[j].x;
-          const dy = activeNodes[i].y - activeNodes[j].y;
+          const nodeB = activeNodes[j];
+          
+          // Fast bounding box check before expensive square root
+          const dx = nodeA.x - nodeB.x;
+          if (Math.abs(dx) > CONNECT_DIST) continue;
+          
+          const dy = nodeA.y - nodeB.y;
+          if (Math.abs(dy) > CONNECT_DIST) continue;
+          
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECT_DIST) {
             const alpha = (1 - dist / CONNECT_DIST) * 0.25;
             ctx.beginPath();
-            ctx.moveTo(activeNodes[i].x, activeNodes[i].y);
-            ctx.lineTo(activeNodes[j].x, activeNodes[j].y);
+            ctx.moveTo(nodeA.x, nodeA.y);
+            ctx.lineTo(nodeB.x, nodeB.y);
             ctx.strokeStyle = `rgba(247, 147, 26, ${alpha})`;
             ctx.lineWidth = 0.4;
             ctx.stroke();

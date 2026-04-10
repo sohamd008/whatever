@@ -28,15 +28,47 @@ export default function CryptoSnake() {
 
     const handleKeyDown = (e) => {
       switch (e.key) {
-        case 'ArrowUp': if (dy === 0) { dx = 0; dy = -1; } break;
-        case 'ArrowDown': if (dy === 0) { dx = 0; dy = 1; } break;
-        case 'ArrowLeft': if (dx === 0) { dx = -1; dy = 0; } break;
-        case 'ArrowRight': if (dx === 0) { dx = 1; dy = 0; } break;
+        case 'ArrowUp': case 'w': case 'W': if (dy === 0) { dx = 0; dy = -1; } break;
+        case 'ArrowDown': case 's': case 'S': if (dy === 0) { dx = 0; dy = 1; } break;
+        case 'ArrowLeft': case 'a': case 'A': if (dx === 0) { dx = -1; dy = 0; } break;
+        case 'ArrowRight': case 'd': case 'D': if (dx === 0) { dx = 1; dy = 0; } break;
         default: break;
       }
     };
 
+    let touchStartX = 0;
+    let touchStartY = 0;
+    
+    const handleTouchStart = (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      if (e.target === canvas) e.preventDefault();
+    };
+    
+    const handleTouchEnd = (e) => {
+      if (!e.changedTouches || e.changedTouches.length === 0) return;
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = touchStartY - touchEndY;
+      
+      // Swipe threshold
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        if (Math.abs(diffX) > 30) {
+          if (diffX > 0 && dx === 0) { dx = -1; dy = 0; } // left
+          else if (diffX < 0 && dx === 0) { dx = 1; dy = 0; } // right
+        }
+      } else {
+        if (Math.abs(diffY) > 30) {
+          if (diffY > 0 && dy === 0) { dx = 0; dy = -1; } // up
+          else if (diffY < 0 && dy === 0) { dx = 0; dy = 1; } // down
+        }
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchend', handleTouchEnd);
 
     const spawnFood = () => {
       food = {
@@ -135,6 +167,8 @@ export default function CryptoSnake() {
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchend', handleTouchEnd);
       clearInterval(gameLoop);
     };
   }, [gameOver]);
@@ -158,7 +192,7 @@ export default function CryptoSnake() {
           ref={canvasRef} 
           width={600} 
           height={600} 
-          className="bg-[#0f1115] rounded-lg border border-white/5"
+          className="bg-[#0f1115] rounded-lg border border-white/5 w-full max-w-full h-auto aspect-square touch-none"
         />
       </div>
 
