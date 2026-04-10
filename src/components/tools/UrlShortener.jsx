@@ -24,7 +24,16 @@ const UrlShortener = () => {
       });
       
       const data = await resp.json();
-      if (!resp.ok) throw new Error(data.error || 'Failed to shorten');
+      if (!resp.ok) {
+        if (resp.status === 409) {
+            setError('This slug is already taken. Try another one.');
+        } else if (data.error && data.error.includes('KV namespace')) {
+            setError('Cloudflare KV "LINKS" not bound. See logs.');
+        } else {
+            setError(data.error || 'Check Link service failed');
+        }
+        return;
+      }
       
       setShortUrl(`${window.location.origin}/s/${data.slug}`);
     } catch (err) {

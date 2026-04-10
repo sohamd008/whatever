@@ -17,10 +17,13 @@ export async function onRequestPost({ request, env }) {
       }), { status: 500 });
     }
 
-    // Check if slug already exists
+    // Collision check
     const existing = await env.LINKS.get(finalSlug);
-    if (existing && slug) {
-      return new Response(JSON.stringify({ error: 'Slug already taken' }), { status: 409 });
+    if (existing) {
+        return new Response(JSON.stringify({ error: "Slug already exists" }), { 
+            status: 409, // Conflict
+            headers: { "Content-Type": "application/json" } 
+        });
     }
 
     // Store the link

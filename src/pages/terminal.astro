@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TerminalManager from '../components/terminal/TerminalManager';
+---
+
+<Layout title="VOID // TERMINAL" hideHeaderFooter={true}>
+  <div class="fixed inset-0 bg-background flex flex-col font-mono text-green-500 overflow-hidden">
+    {/* Terminal Header */}
+    <div class="flex items-center justify-between px-6 py-3 bg-black border-b border-green-900/30">
+        <div class="flex items-center gap-4">
+            <div class="flex gap-1.5">
+                <div class="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
+            </div>
+            <span class="text-xs font-bold tracking-[0.3em] uppercase opacity-60">System // Admin Console v2.0</span>
+        </div>
+        <div class="text-[10px] opacity-40 uppercase tracking-widest">Secure Link Management Layer</div>
+    </div>
+
+    {/* Terminal Body */}
+    <div class="flex-grow relative overflow-auto custom-scrollbar p-6">
+       <TerminalManager client:load />
+    </div>
+
+    {/* Footer */}
+    <div class="px-6 py-2 bg-black border-t border-green-900/20 flex justify-between items-center text-[9px] opacity-40 uppercase tracking-widest">
+        <div>Root@SohamOS: ~Link_Control</div>
+        <a href="/" class="hover:text-green-400 hover:underline">Exit Session</a>
+    </div>
+  </div>
+</Layout>
+
+<style is:global>
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: #064e3b; border-radius: 10px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #059669; }
+</style>
