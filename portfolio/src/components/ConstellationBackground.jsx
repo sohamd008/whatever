@@ -18,8 +18,8 @@ const ConstellationBackground = () => {
 
     // ENHANCED PARAMETERS
     const NODE_COUNT = isMobile ? 120 : 600; // Lower density on mobile for optimization
-    const ATTRACT_RADIUS = isMobile ? 100 : 150; 
-    const CONNECT_DIST = isMobile ? 80 : 110;    
+    const ATTRACT_RADIUS = isMobile ? 80 : 100; // Reduced radius for a tighter interaction
+    const CONNECT_DIST = isMobile ? 60 : 80;    
 
     function resize() {
       const oldW = W || window.innerWidth;
