@@ -3,20 +3,37 @@ import { ArrowLeft, Bot, User } from 'lucide-react';
 
 const GRID_SIZE = 20;
 const CELL_COUNT = 20;
+const LEADERBOARD_KEY = 'leaderboard_snake';
+
+const getLeaderboard = () => {
+  try {
+    return JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || [];
+  } catch { return []; }
+};
+
+const saveScore = (score) => {
+  const lb = getLeaderboard();
+  lb.push({ score, date: Date.now() });
+  lb.sort((a, b) => b.score - a.score);
+  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(lb.slice(0, 10)));
+};
 
 export default function Snake() {
   const canvasRef = useRef(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [autoPlay, setAutoPlay] = useState(false);
+  const [leaderboard, setLeaderboard] = useState(getLeaderboard);
   const autoRef = useRef(false);
 
   useEffect(() => { autoRef.current = autoPlay; }, [autoPlay]);
 
   const restart = useCallback(() => {
+    if (score > 0) saveScore(score);
+    setLeaderboard(getLeaderboard());
     setScore(0);
     setGameOver(false);
-  }, []);
+  }, [score]);
 
   useEffect(() => {
     if (gameOver) return;
@@ -190,8 +207,12 @@ export default function Snake() {
         <p className="text-white/30 text-xs font-mono mt-1">WASD / Arrows / Swipe to move · Watch the AI chase the code</p>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex gap-8">
         <p className="text-2xl font-bold font-mono text-primary">{score}</p>
+        <div className="text-right">
+          <p className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">Best</p>
+          <p className="text-lg font-bold font-mono text-white">{leaderboard[0]?.score || 0}</p>
+        </div>
       </div>
 
       <div className="relative border border-white/10 rounded-xl overflow-hidden shadow-elevation">

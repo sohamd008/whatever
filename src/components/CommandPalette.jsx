@@ -22,6 +22,7 @@ const CommandPalette = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [showHelp, setShowHelp] = useState(false);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -31,14 +32,31 @@ const CommandPalette = () => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         setIsOpen(prev => !prev);
+        setShowHelp(false);
+      }
+      if (e.key === '/' && !isOpen && !e.ctrlKey && !e.metaKey) {
+        const target = e.target;
+        if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          setIsOpen(true);
+        }
+      }
+      if (e.key === '?' && !isOpen && !e.ctrlKey && !e.metaKey) {
+        const target = e.target;
+        if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          setIsOpen(true);
+          setShowHelp(true);
+        }
       }
       if (e.key === 'Escape') {
         setIsOpen(false);
+        setShowHelp(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isOpen]);
 
   // Filter Logic
   const filteredItems = searchItems.filter(item => 

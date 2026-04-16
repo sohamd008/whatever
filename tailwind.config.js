@@ -1,21 +1,21 @@
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: "#030304",
-        surface: "#0F1115",
-        foreground: "#FFFFFF",
-        muted: "#CBD5E1",
-        border: "#1E293B",
-        primary: "#F7931A", // Bitcoin Orange
-        secondary: "#EA580C", // Burnt Orange
-        tertiary: "#FFD600", // Digital Gold
+        background: "hsl(var(--background) / <alpha-value>)",
+        surface: "hsl(var(--surface) / <alpha-value>)",
+        foreground: "hsl(var(--foreground) / <alpha-value>)",
+        muted: "hsl(var(--muted) / <alpha-value>)",
+        border: "hsl(var(--border) / <alpha-value>)",
+        primary: "#F7931A",
+        secondary: "#EA580C",
+        tertiary: "#FFD600",
       },
       fontFamily: {
         heading: ["Space Grotesk", "sans-serif"],

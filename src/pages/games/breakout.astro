@@ -1,0 +1,8 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breakout from '../../games/Breakout';
+---
+
+<Layout title="Breakout" pathname="/games/breakout" hideHeaderFooter={true}>
+  <Breakout client:load />
+</Layout>

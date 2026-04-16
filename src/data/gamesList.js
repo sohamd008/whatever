@@ -1,5 +1,18 @@
-// 5 Custom-built games — each with unique SVG art and AI autonomous mode
+// 6 Custom-built games — each with unique SVG art and AI autonomous mode
 export const gamesList = [
+  {
+    id: "breakout",
+    title: "Breakout",
+    developer: "Soham Dandekar",
+    type: "custom",
+    path: "/games/breakout",
+    thumbnail: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&w=400&q=80",
+    svgArt: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#030304"/><rect x="20" y="40" width="30" height="15" fill="#F7931A" opacity="0.8"/><rect x="60" y="40" width="30" height="15" fill="#06b6d4" opacity="0.8"/><rect x="100" y="40" width="30" height="15" fill="#a855f7" opacity="0.8"/><rect x="140" y="40" width="30" height="15" fill="#22c55e" opacity="0.8"/><rect x="20" y="65" width="30" height="15" fill="#FFD600" opacity="0.8"/><rect x="60" y="65" width="30" height="15" fill="#ef4444" opacity="0.8"/><rect x="80" y="160" width="40" height="8" fill="white" opacity="0.6"/><circle cx="100" cy="100" r="6" fill="white" opacity="0.9"/></svg>`,
+    description: "Classic brick-breaking action. Break all bricks to advance through 3 levels.",
+    tags: ["Arcade", "Classic"],
+    featured: true,
+    color: "#F7931A"
+  },
   {
     id: "flappy-bird",
     title: "Flappy Bird",

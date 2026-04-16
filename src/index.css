@@ -2,6 +2,24 @@
 @config "../tailwind.config.js";
 
 @layer base {
+  :root {
+    --background: 0 0% 98%;
+    --surface: 0 0% 100%;
+    --foreground: 0 0% 8%;
+    --muted: 210 20% 40%;
+    --border: 210 20% 85%;
+    --color-pair: "light";
+  }
+
+  .dark {
+    --background: 0 0% 3%;
+    --surface: 0 0% 8%;
+    --foreground: 0 0% 100%;
+    --muted: 210 40% 80%;
+    --border: 215 25% 18%;
+    --color-pair: "dark";
+  }
+
   html {
     scroll-behavior: smooth;
   }
@@ -24,7 +42,6 @@
     @apply bg-black/40 backdrop-blur-lg border border-white/10;
   }
 
-  /* Custom grid pattern for fallback background if needed */
   .bg-grid-pattern {
     background-size: 50px 50px;
     background-image:
