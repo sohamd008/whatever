@@ -4,15 +4,14 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background) / <alpha-value>)",
-        surface: "hsl(var(--surface) / <alpha-value>)",
-        foreground: "hsl(var(--foreground) / <alpha-value>)",
-        muted: "hsl(var(--muted) / <alpha-value>)",
-        border: "hsl(var(--border) / <alpha-value>)",
+        background: "#030304",
+        surface: "#0F1115",
+        foreground: "#FFFFFF",
+        muted: "#CBD5E1",
+        border: "#1E293B",
         primary: "#F7931A",
         secondary: "#EA580C",
         tertiary: "#FFD600",
