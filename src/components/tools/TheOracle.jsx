@@ -4,7 +4,7 @@ import { TerminalSquare, Send, Cpu } from 'lucide-react';
 const TheOracle = () => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
-    { role: 'oracle', text: "INITIALIZING NEURAL LINK...\nCONNECTION ESTABLISHED.\nI AM THE ORACLE. DESIGNATION: VOID_AI.\n\nAWAITING QUERY INPUT." }
+    { role: 'oracle', text: "CONNECTION ESTABLISHED.\nI AM THE ORACLE.\n\nAWAITING YOUR QUERY." }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const endRef = useRef(null);
