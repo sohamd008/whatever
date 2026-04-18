@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Card, { CardHeader, CardTitle, CardContent } from '../ui/Card';
+import Card from '../ui/Card';
 import { Key } from 'lucide-react';
 
 const JwtDecoder = () => {
@@ -41,13 +41,13 @@ const JwtDecoder = () => {
 
   return (
     <Card className="h-full border-white/5 relative overflow-hidden group">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-glow text-white/90">
+      <div className="mb-6">
+        <h2 className="flex items-center gap-2 text-glow text-white/90 text-lg font-bold font-heading m-0">
           <Key className="w-5 h-5 text-primary" /> JWT Decoder
-        </CardTitle>
-        <p className="text-xs text-muted font-mono mt-2">Decode JSON Web Tokens instantly.</p>
-      </CardHeader>
-      <CardContent className="space-y-4">
+        </h2>
+        <p className="text-xs text-muted font-mono mt-2 mb-0">Decode JSON Web Tokens instantly.</p>
+      </div>
+      <div className="space-y-4">
         <textarea
           value={token}
           onChange={handleDecode}
@@ -62,7 +62,7 @@ const JwtDecoder = () => {
             </pre>
           </div>
         )}
-      </CardContent>
+      </div>
     </Card>
   );
 };
