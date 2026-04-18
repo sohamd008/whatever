@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TheOracle from '../components/tools/TheOracle.jsx';
+---
+
+<Layout
+  title="The Oracle | Soham Dandekar"
+  pathname="/oracle"
+  description="Consult The Oracle. An interactive neural net terminal powered by Llama 3 edge compute."
+>
+  <main class="flex-grow flex flex-col items-center justify-center container mx-auto max-w-4xl px-6 pt-32 pb-20 min-h-[80vh]">
+    <div class="mb-12 text-center animate-fadeInUp w-full">
+      <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-4 uppercase tracking-tighter">
+        Neural Link <span class="text-primary text-glow">Established</span>
+      </h1>
+      <p class="text-muted text-sm md:text-base max-w-2xl mx-auto font-mono uppercase tracking-widest opacity-70">
+        Direct connection to the Void OS Sentinel. Awaiting directives.
+      </p>
+    </div>
+    <div class="w-full animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;">
+      <TheOracle client:only="react" />
+    </div>
+  </main>
+</Layout>

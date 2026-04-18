@@ -15,7 +15,6 @@ import RegexTester from './RegexTester';
 import HashGenerator from './HashGenerator';
 import LoremIpsum from './LoremIpsum';
 import JwtDecoder from './JwtDecoder';
-import TheOracle from './TheOracle';
 
 const ToolsDashboard = () => {
   return (
@@ -71,11 +70,6 @@ const ToolsDashboard = () => {
         
         <div id="qr-generator" className="scroll-mt-28">
             <QrGenerator />
-        </div>
-
-        {/* The Oracle AI Row */}
-        <div id="the-oracle" className="lg:col-span-3 scroll-mt-28">
-          <TheOracle />
         </div>
 
         {/* DevTools Row */}
