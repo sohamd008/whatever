@@ -105,8 +105,8 @@ const imageUrl = new URL(image, Astro.url.origin).toString();
                   <a href="#contact" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">CONTACT</a>
                 </>
               ) : null}
-              <a href="/tools" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors ${pathname === "/tools" ? "text-primary font-bold" : "text-muted"}`}>
-                TOOLS
+              <a href="/toolbox" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors ${pathname === "/toolbox" ? "text-primary font-bold" : "text-muted"}`}>
+                TOOLBOX
               </a>
               <a href="/games" class={`text-xs md:text-sm font-mono tracking-wider hover:text-tertiary transition-colors ${pathname === "/games" || pathname.startsWith("/games/") ? "text-tertiary font-bold" : "text-muted"}`}>
                 ARCADE
