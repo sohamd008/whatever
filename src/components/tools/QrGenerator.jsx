@@ -79,7 +79,7 @@ const QrGenerator = () => {
       </div>
 
       <div className="mt-6 text-[9px] font-mono text-muted/30 text-center uppercase tracking-[0.2em] animate-pulse">
-        VOID ENCRYPTION ACTIVE
+        Generated via QRServer API
       </div>
     </div>
   );

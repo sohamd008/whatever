@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { XCircle, AlertCircle } from 'lucide-react';
 
 const RegexTester = () => {
   const [pattern, setPattern] = useState('');

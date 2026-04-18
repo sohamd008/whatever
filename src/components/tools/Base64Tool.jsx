@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Lock, Copy, RefreshCcw, ArrowLeftRight } from 'lucide-react';
 
+const encodeBase64 = (input) => {
+  const bytes = new TextEncoder().encode(input);
+  const binary = Array.from(bytes, (byte) => String.fromCharCode(byte)).join('');
+  return btoa(binary);
+};
+
+const decodeBase64 = (input) => {
+  const binary = atob(input);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+};
+
 const Base64Tool = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
@@ -13,9 +25,9 @@ const Base64Tool = () => {
     try {
       if (!input.trim()) return;
       if (mode === 'encode') {
-        setOutput(btoa(unescape(encodeURIComponent(input))));
+        setOutput(encodeBase64(input));
       } else {
-        setOutput(decodeURIComponent(escape(atob(input))));
+        setOutput(decodeBase64(input));
       }
     } catch (err) {
       setError(mode === 'decode' ? 'Invalid Base64 string' : err.message);

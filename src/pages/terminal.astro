@@ -3,7 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import TerminalManager from '../components/terminal/TerminalManager';
 ---
 
-<Layout title="VOID // TERMINAL" hideHeaderFooter={true}>
+<Layout
+  title="Link Console | soham.eu.cc"
+  description="Internal link-management console for the soham.eu.cc shortener."
+  hideHeaderFooter={true}
+  noIndex={true}
+>
   <div class="fixed inset-0 bg-background flex flex-col font-mono text-green-500 overflow-hidden">
     {/* Terminal Header */}
     <div class="flex items-center justify-between px-6 py-3 bg-black border-b border-green-900/30">
@@ -13,9 +18,9 @@ import TerminalManager from '../components/terminal/TerminalManager';
                 <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
                 <div class="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50"></div>
             </div>
-            <span class="text-xs font-bold tracking-[0.3em] uppercase opacity-60">System // Admin Console v2.0</span>
+            <span class="text-xs font-bold tracking-[0.3em] uppercase opacity-60">System // Link Console v2.0</span>
         </div>
-        <div class="text-[10px] opacity-40 uppercase tracking-widest">Secure Link Management Layer</div>
+        <div class="text-[10px] opacity-40 uppercase tracking-widest">Cloudflare KV Management Layer</div>
     </div>
 
     {/* Terminal Body */}

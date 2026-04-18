@@ -24,7 +24,7 @@ const ToolsDashboard = () => {
           The <span className="text-primary text-glow">Void</span> Toolbox
         </h1>
         <p className="text-muted text-lg max-w-2xl mx-auto font-body">
-          A high-performance cluster of offline-first productivity and developer utilities.
+          A local-first cluster of productivity and developer utilities, with a few network-backed helpers where they add real value.
         </p>
       </div>
 
@@ -33,38 +33,60 @@ const ToolsDashboard = () => {
         
         {/* Row 1, Col 1 */}
         <div className="flex flex-col gap-6">
-          <Clock />
-          <Timer />
+          <section id="clock" className="scroll-mt-28">
+            <Clock />
+          </section>
+          <section id="timer" className="scroll-mt-28">
+            <Timer />
+          </section>
           <PasswordGenerator />
         </div>
 
         {/* Row 1, Col 2 */}
         <div className="flex flex-col gap-6">
-          <Notepad />
-          <ColorTools />
+          <section id="notepad" className="scroll-mt-28">
+            <Notepad />
+          </section>
+          <section id="color-tools" className="scroll-mt-28">
+            <ColorTools />
+          </section>
         </div>
 
         {/* Row 1, Col 3 */}
         <div className="flex flex-col gap-6">
-          <UrlShortener />
-          <UnitConverter />
+          <section id="url-shortener" className="scroll-mt-28">
+            <UrlShortener />
+          </section>
+          <section id="unit-converter" className="scroll-mt-28">
+            <UnitConverter />
+          </section>
         </div>
 
         {/* Developer Row */}
-        <div className="lg:col-span-2">
+        <div id="json-formatter" className="lg:col-span-2 scroll-mt-28">
             <JsonFormatter />
         </div>
         
-        <div>
+        <div id="qr-generator" className="scroll-mt-28">
             <QrGenerator />
         </div>
 
         {/* DevTools Row */}
-        <UuidGenerator />
-        <Base64Tool />
-        <HashGenerator />
-        <LoremIpsum />
-        <RegexTester />
+        <div id="uuid-generator" className="scroll-mt-28">
+          <UuidGenerator />
+        </div>
+        <div id="base64-tool" className="scroll-mt-28">
+          <Base64Tool />
+        </div>
+        <div id="hash-generator" className="scroll-mt-28">
+          <HashGenerator />
+        </div>
+        <div id="lorem-ipsum" className="scroll-mt-28">
+          <LoremIpsum />
+        </div>
+        <div id="regex-tester" className="scroll-mt-28">
+          <RegexTester />
+        </div>
         
       </div>
 

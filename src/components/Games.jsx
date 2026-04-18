@@ -10,7 +10,7 @@ const Games = () => {
           The <span className="bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent text-glow">Arcade</span>
         </h1>
         <p className="text-muted text-lg max-w-2xl mx-auto">
-          Enter the grid. {gamesList.length} original games, each with an AI autonomous mode. Built from scratch.
+          Enter the grid. {gamesList.length} original games built from scratch, with autoplay modes and AI challengers across most titles.
         </p>
       </div>
 

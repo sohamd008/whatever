@@ -1,9 +1,9 @@
 export const searchItems = [
   // Core Pages
-  { title: 'Home', path: '/', category: 'Page', icon: 'Home' },
-  { title: 'Arcade Dashboard', path: '/games', category: 'Page', icon: 'Gamepad2' },
-  { title: 'The Void Toolbox', path: '/tools', category: 'Page', icon: 'Tool' },
-  { title: 'Security Terminal', path: '/terminal', category: 'Page', icon: 'Terminal' },
+  { title: 'Home', path: '/', category: 'Page', icon: 'Home', keywords: ['portfolio', 'landing', 'soham'] },
+  { title: 'Arcade Dashboard', path: '/games', category: 'Page', icon: 'Gamepad2', keywords: ['games', 'arcade', 'canvas'] },
+  { title: 'The Void Toolbox', path: '/tools', category: 'Page', icon: 'Tool', keywords: ['tools', 'utilities', 'browser'] },
+  { title: 'Link Console', path: '/terminal', category: 'Page', icon: 'Terminal', keywords: ['admin', 'shortener', 'links', 'kv'] },
 
   // Games (Arcade)
   { title: 'Snake (Crypto)', path: '/games/snake', category: 'Game', icon: 'Cpu' },
@@ -14,14 +14,14 @@ export const searchItems = [
   { title: 'Tic Tac Toe', path: '/games/tic-tac-toe', category: 'Game', icon: 'Divide' },
 
   // Tools (Launchers)
-  { title: 'Url Shortener', path: '/tools', category: 'Tool', icon: 'Link' },
-  { title: 'Secure Notepad', path: '/tools', category: 'Tool', icon: 'FileText' },
-  { title: 'Unit Converter', path: '/tools', category: 'Tool', icon: 'ArrowLeftRight' },
-  { title: 'QR Matrix', path: '/tools', category: 'Tool', icon: 'QrCode' },
-  { title: 'JSON Formatter', path: '/tools', category: 'Tool', icon: 'Brackets' },
-  { title: 'Color Studio', path: '/tools', category: 'Tool', icon: 'Palette' },
-  { title: 'Digital Timer', path: '/tools', category: 'Tool', icon: 'Timer' },
-  { title: 'Clock', path: '/tools', category: 'Tool', icon: 'Clock' },
+  { title: 'Url Shortener', path: '/tools#url-shortener', category: 'Tool', icon: 'Link', keywords: ['links', 'slug', 'short'] },
+  { title: 'Local Notepad', path: '/tools#notepad', category: 'Tool', icon: 'FileText', keywords: ['notes', 'markdown', 'local storage'] },
+  { title: 'Unit Converter', path: '/tools#unit-converter', category: 'Tool', icon: 'ArrowLeftRight', keywords: ['convert', 'length', 'weight', 'data', 'temperature'] },
+  { title: 'QR Matrix', path: '/tools#qr-generator', category: 'Tool', icon: 'QrCode', keywords: ['qr', 'qr code', 'share'] },
+  { title: 'JSON Formatter', path: '/tools#json-formatter', category: 'Tool', icon: 'Brackets', keywords: ['json', 'prettify', 'minify'] },
+  { title: 'Color Studio', path: '/tools#color-tools', category: 'Tool', icon: 'Palette', keywords: ['color', 'hex', 'rgb', 'hsl'] },
+  { title: 'Digital Timer', path: '/tools#timer', category: 'Tool', icon: 'Timer', keywords: ['countdown', 'focus', 'timer'] },
+  { title: 'Clock', path: '/tools#clock', category: 'Tool', icon: 'Clock', keywords: ['time', 'clock'] },
 
   // Social / External
   { title: 'GitHub Repository', path: 'https://github.com/sohamd008', category: 'External', icon: 'Github' },

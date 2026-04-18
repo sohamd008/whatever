@@ -11,4 +11,4 @@ Disallow: /
 User-agent: Claude-Web
 Disallow: /
 
-Sitemap: https://sohamdandekar.me/sitemap-index.xml
+Sitemap: https://soham.eu.cc/sitemap-index.xml

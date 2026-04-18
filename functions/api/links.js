@@ -1,67 +1,75 @@
+const json = (body, status = 200) => new Response(JSON.stringify(body), {
+  status,
+  headers: {
+    'Content-Type': 'application/json',
+    'Cache-Control': 'no-store',
+  },
+});
+
+const isValidSlug = (value) => /^[a-z0-9-]{3,40}$/.test(value);
+
+const listAllKeys = async (namespace) => {
+  const keys = [];
+  let cursor;
+
+  do {
+    const page = await namespace.list({ cursor });
+    keys.push(...page.keys);
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+
+  return keys;
+};
+
 export async function onRequest({ request, env }) {
   const authHeader = request.headers.get('x-terminal-auth');
   const serverPass = env.TERMINAL_PASS;
 
-  if (!serverPass || authHeader !== serverPass) {
-    return new Response(JSON.stringify({ error: 'Unauthorized' }), { 
-      status: 401,
-      headers: { 'Content-Type': 'application/json' }
-    });
-  }
+  if (!env.LINKS) return json({ error: 'Cloudflare KV namespace "LINKS" is not configured.' }, 500);
+  if (!serverPass || authHeader !== serverPass) return json({ error: 'Unauthorized' }, 401);
 
-  // Handle GET (List)
   if (request.method === 'GET') {
     try {
-      const list = await env.LINKS.list();
-      // Fetch values for each key to show destinations
-      const links = await Promise.all(list.keys.map(async (k) => {
-        const url = await env.LINKS.get(k.name);
-        return { slug: k.name, url };
-      }));
-      return new Response(JSON.stringify({ links }), {
-        headers: { 'Content-Type': 'application/json' }
-      });
+      const keys = await listAllKeys(env.LINKS);
+      const links = await Promise.all(keys.map(async (key) => ({
+        slug: key.name,
+        url: await env.LINKS.get(key.name),
+      })));
+
+      links.sort((a, b) => a.slug.localeCompare(b.slug));
+      return json({ links });
     } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+      return json({ error: err.message || 'Unable to list links.' }, 500);
     }
   }
 
-  // Handle DELETE
   if (request.method === 'POST') {
     try {
       const { action, slug } = await request.json();
-      if (action === 'delete' && slug) {
-        await env.LINKS.delete(slug);
-        return new Response(JSON.stringify({ success: true }), {
-          headers: { 'Content-Type': 'application/json' }
-        });
-      }
-      if (action === 'clear') {
-        let list = await env.LINKS.list();
-        
-        // Handle empty or missing keys gracefully
-        if (!list.keys || list.keys.length === 0) {
-          return new Response(JSON.stringify({ success: true, count: 0 }), {
-            headers: { 'Content-Type': 'application/json' }
-          });
-        }
 
-        // Use sequential or chunked deletion to stay within sub-request limits (max 50)
+      if (action === 'delete') {
+        if (!slug || !isValidSlug(slug)) return json({ error: 'Provide a valid slug to delete.' }, 400);
+        await env.LINKS.delete(slug);
+        return json({ success: true });
+      }
+
+      if (action === 'clear') {
+        const keys = await listAllKeys(env.LINKS);
         let deletedCount = 0;
-        for (const k of list.keys) {
-          await env.LINKS.delete(k.name);
+
+        for (const key of keys) {
+          await env.LINKS.delete(key.name);
           deletedCount++;
         }
 
-        return new Response(JSON.stringify({ success: true, count: deletedCount }), {
-          headers: { 'Content-Type': 'application/json' }
-        });
+        return json({ success: true, count: deletedCount });
       }
-      return new Response(JSON.stringify({ error: 'Invalid action' }), { status: 400 });
+
+      return json({ error: 'Invalid action.' }, 400);
     } catch (err) {
-      return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+      return json({ error: err.message || 'Unable to update links.' }, 500);
     }
   }
 
-  return new Response('Method not allowed', { status: 405 });
+  return json({ error: 'Method not allowed.' }, 405);
 }

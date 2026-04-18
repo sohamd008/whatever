@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Disc, Terminal, PlayCircle, Zap, Shield, MousePointer2, Hammer } from 'lucide-react';
+import { Mail, Disc, Terminal, PlayCircle, Zap, FileText, Palette, Hammer } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 
@@ -26,8 +26,8 @@ const Home = () => {
         </h1>
         
         <p className="text-muted text-lg md:text-2xl max-w-3xl mx-auto mb-14 font-medium leading-relaxed opacity-80">
-          Precision Engineering. Interactive Tools. Retro Arcade. <br class="hidden md:block" />
-          Exploring the intersections of high-performance code and cultural preservation.
+          Personal site, browser toolkit, retro arcade, and digital archive work. <br className="hidden md:block" />
+          Building precise web experiences with a soft spot for preservation projects and playful interfaces.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 items-center">
@@ -46,16 +46,16 @@ const Home = () => {
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted">URL Shortener</span>
             </div>
             <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
-                <Shield className="w-5 h-5 text-tertiary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Secure Notes</span>
+                <FileText className="w-5 h-5 text-tertiary" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Local Notes</span>
             </div>
             <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
-                <MousePointer2 className="w-5 h-5 text-primary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">CSS Studio</span>
+                <Palette className="w-5 h-5 text-primary" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Color Tools</span>
             </div>
             <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
                 <Terminal className="w-5 h-5 text-tertiary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Admin Panel</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Link Console</span>
             </div>
         </div>
       </main>

@@ -59,7 +59,7 @@ export const gamesList = [
     type: "custom",
     path: "/games/2048",
     thumbnail: "https://images.unsplash.com/photo-1580584473179-1ce556aa2a17?auto=format&fit=crop&w=400&q=80",
-    svgArt: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#030304"/><rect x="25" y="25" width="70" height="70" rx="8" fill="#white" opacity="0.1"/><rect x="105" y="25" width="70" height="70" rx="8" fill="#white" opacity="0.05"/><rect x="25" y="105" width="70" height="70" rx="8" fill="#white" opacity="0.05"/><rect x="105" y="105" width="70" height="70" rx="8" fill="#F7931A" opacity="0.4"/><text x="45" y="70" font-family="monospace" font-weight="bold" fill="white" font-size="24" opacity="0.5">2</text><text x="120" y="150" font-family="monospace" font-weight="bold" fill="white" font-size="24" opacity="0.8">2048</text></svg>`,
+    svgArt: `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="#030304"/><rect x="25" y="25" width="70" height="70" rx="8" fill="white" opacity="0.1"/><rect x="105" y="25" width="70" height="70" rx="8" fill="white" opacity="0.05"/><rect x="25" y="105" width="70" height="70" rx="8" fill="white" opacity="0.05"/><rect x="105" y="105" width="70" height="70" rx="8" fill="#F7931A" opacity="0.4"/><text x="45" y="70" font-family="monospace" font-weight="bold" fill="white" font-size="24" opacity="0.5">2</text><text x="120" y="150" font-family="monospace" font-weight="bold" fill="white" font-size="24" opacity="0.8">2048</text></svg>`,
     description: "Slide and merge tiles to reach 2048. AI uses expectimax strategy to chase high scores.",
     tags: ["Logic", "Puzzle", "AI Mode"],
     color: "#F7931A"

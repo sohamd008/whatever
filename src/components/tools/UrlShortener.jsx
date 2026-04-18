@@ -80,9 +80,10 @@ const UrlShortener = () => {
             type="text"
             placeholder="my-link"
             value={customSlug}
-            onChange={(e) => setCustomSlug(e.target.value)}
+            onChange={(e) => setCustomSlug(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
             className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 font-mono text-sm text-white outline-none focus:border-primary/50 transition-colors"
           />
+          <p className="mt-2 text-[9px] font-mono text-muted/40 uppercase tracking-wider">Letters, numbers, and hyphens only</p>
         </div>
 
         <button 
@@ -119,7 +120,7 @@ const UrlShortener = () => {
       )}
 
       <div className="mt-auto pt-6 text-[9px] font-mono text-muted uppercase tracking-tighter text-center opacity-40 italic">
-        * Works globally via Cloudflare KV
+        * Requires the LINKS KV binding in Cloudflare Pages
       </div>
     </div>
   );

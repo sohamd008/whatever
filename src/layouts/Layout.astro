@@ -3,8 +3,18 @@ import '../index.css';
 import ConstellationBackground from '../components/ConstellationBackground';
 import CommandPalette from '../components/CommandPalette';
 
-const { title = "Soham's Website", pathname = "/", hideHeaderFooter = false } = Astro.props;
+const defaultDescription = "Portfolio, browser tools, original arcade experiments, and digital archive work by Soham Dandekar.";
+const {
+  title = 'Soham Dandekar',
+  pathname = '/',
+  description = defaultDescription,
+  image = '/og-image.svg',
+  hideHeaderFooter = false,
+  noIndex = false,
+} = Astro.props;
 const currentYear = new Date().getFullYear();
+const canonicalUrl = Astro.url.href;
+const imageUrl = new URL(image, Astro.url.origin).toString();
 ---
 
 <!doctype html>
@@ -12,9 +22,10 @@ const currentYear = new Date().getFullYear();
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://soham.eu.cc" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#030304" />
     <link rel="manifest" href="/manifest.json" />
+    <link rel="canonical" href={canonicalUrl} />
     
     <!-- Preconnect to Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,21 +37,23 @@ const currentYear = new Date().getFullYear();
     <!-- Primary Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
-    <meta name="description" content="Precision engineering meets interactive design. Explore Soham Dandekar's portfolio of web tools, arcade games, and digital archives." />
+    <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:site_name" content="soham.eu.cc" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Explore Soham Dandekar's interactive portfolio of custom-built tools, retro games, and digital archives." />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content="Explore Soham Dandekar's interactive portfolio of custom-built tools, retro games, and digital archives." />
-    <meta property="twitter:image" content="/og-image.png" />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageUrl} />
 
     <!-- JSON-LD Structured Data -->
     <script is:inline type="application/ld+json">
@@ -48,7 +61,7 @@ const currentYear = new Date().getFullYear();
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Soham Dandekar",
-        "url": "https://sohamdandekar.me",
+        "url": "https://soham.eu.cc",
         "jobTitle": "Developer",
         "knowsAbout": ["Web Development", "React", "Astro", "Game Design"],
         "sameAs": [

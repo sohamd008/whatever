@@ -1,10 +1,13 @@
 {
-  "name": "SohamOS Backend",
-  "short_name": "SohamOS",
+  "name": "Soham Dandekar",
+  "short_name": "soham.eu.cc",
+  "description": "Portfolio, browser tools, original arcade experiments, and archive work by Soham Dandekar.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#030304",
   "theme_color": "#F7931A",
+  "categories": ["portfolio", "productivity", "games", "developer-tools"],
   "icons": [
     {
       "src": "/favicon.svg",

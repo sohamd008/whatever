@@ -1,5 +1,54 @@
 import React, { useState } from 'react';
-import { Quote, Copy, RefreshCw } from 'lucide-react';
+import { Quote, Copy } from 'lucide-react';
+
+const WORDS = [
+  'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+  'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+  'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+  'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+  'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+  'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+  'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+  'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum', 'perspiciatis',
+  'unde', 'omnis', 'iste', 'natus', 'error', 'voluptatem', 'accusantium',
+  'doloremque', 'laudantium', 'totam', 'rem', 'aperiam', 'eaque', 'ipsa',
+  'quae', 'ab', 'illo', 'inventore', 'veritatis', 'quasi', 'architecto',
+  'beatae', 'vitae', 'dicta', 'explicabo', 'nemo', 'ipsam', 'quia', 'voluptas',
+  'aspernatur', 'aut', 'odit', 'fugit', 'consequuntur', 'magni', 'dolores',
+  'eos', 'ratione', 'sequi', 'nesciunt', 'neque', 'porro', 'quisquam', 'nemo',
+  'qui', 'dolorem', 'ipsum', 'quia', 'dolor', 'sit', 'amet', 'consectetur',
+];
+
+const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1);
+
+const generateWords = (count) => {
+  const selected = [];
+
+  for (let i = 0; i < count; i++) {
+    selected.push(WORDS[Math.floor(Math.random() * WORDS.length)]);
+  }
+
+  return selected.join(' ');
+};
+
+const generateLorem = ({ type, count }) => {
+  const result = [];
+
+  if (type === 'paragraphs') {
+    for (let index = 0; index < count; index++) {
+      const paragraphLength = Math.floor(Math.random() * 40) + 20;
+      result.push(`${capitalize(generateWords(paragraphLength))}.`);
+    }
+
+    return result.join('\n\n');
+  }
+
+  if (type === 'sentences') {
+    return `${capitalize(generateWords(count * 6))}.`;
+  }
+
+  return generateWords(count);
+};
 
 const LoremIpsum = () => {
   const [count, setCount] = useState(3);
@@ -7,50 +56,9 @@ const LoremIpsum = () => {
   const [output, setOutput] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const words = [
-    'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
-    'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
-    'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
-    'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
-    'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
-    'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
-    'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
-    'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum', 'perspiciatis',
-    'unde', 'omnis', 'iste', 'natus', 'error', 'voluptatem', 'accusantium',
-    'doloremque', 'laudantium', 'totam', 'rem', 'aperiam', 'eaque', 'ipsa',
-    'quae', 'ab', 'illo', 'inventore', 'veritatis', 'quasi', 'architecto',
-    'beatae', 'vitae', 'dicta', 'explicabo', 'nemo', 'ipsam', 'quia', 'voluptas',
-    'aspernatur', 'aut', 'odit', 'fugit', 'consequuntur', 'magni', 'dolores',
-    'eos', 'ratione', 'sequi', 'nesciunt', 'neque', 'porro', 'quisquam', 'nemo',
-    'qui', 'dolorem', 'ipsum', 'quia', 'dolor', 'sit', 'amet', 'consectetur',
-  ];
-
   const generate = () => {
-    const result = [];
-    if (type === 'paragraphs') {
-      for (let p = 0; p < count; p++) {
-        const paraLength = Math.floor(Math.random() * 40) + 20;
-        const paragraph = generateWords(paraLength);
-        result.push(capitalize(paragraph) + '.');
-      }
-} else if (type === 'sentences') {
-      const sentLength = count * 6;
-      result.push(capitalize(generateWords(sentLength)) + '.');
-    } else if (type === 'words') {
-      result.push(generateWords(count));
-    }
-    setOutput(result.join(type === 'paragraphs' ? '\n\n' : ' '));
+    setOutput(generateLorem({ type, count }));
   };
-
-  const generateWords = (n) => {
-    const selected = [];
-    for (let i = 0; i < n; i++) {
-      selected.push(words[Math.floor(Math.random() * words.length)]);
-    }
-    return selected.join(' ');
-  };
-
-  const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 
   const copy = () => {
     if (!output) return;

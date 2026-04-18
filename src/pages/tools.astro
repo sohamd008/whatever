@@ -3,8 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import ToolsDashboard from '../components/tools/ToolsDashboard.jsx';
 ---
 
-<Layout title="Soham | Tools" pathname="/tools">
+<Layout
+  title="Tools | Soham Dandekar"
+  pathname="/tools"
+  description="Local-first browser tools for notes, timers, passwords, JSON, regex, hashes, Base64, colors, QR codes, and more."
+>
   <main class="flex-grow pt-20">
-    <ToolsDashboard client:load />
+    <ToolsDashboard client:only="react" />
   </main>
 </Layout>

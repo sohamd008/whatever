@@ -3,6 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 import GamesPage from '../../components/Games.jsx';
 ---
 
-<Layout title="Soham's Arcade" pathname="/games">
+<Layout
+  title="Arcade | Soham Dandekar"
+  pathname="/games"
+  description="Original browser arcade experiments built with React and canvas, with autoplay and AI challengers across most titles."
+>
   <GamesPage client:load />
 </Layout>

@@ -3,6 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import NotFound from '../components/NotFound.jsx';
 ---
 
-<Layout title="404 | Lost in the Void" pathname="/404">
+<Layout
+  title="404 | Lost in the Void"
+  pathname="/404"
+  description="The page you requested could not be found on soham.eu.cc."
+  noIndex={true}
+>
   <NotFound client:load />
 </Layout>

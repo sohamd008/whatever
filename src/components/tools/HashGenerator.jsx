@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FileKey, Copy, Check } from 'lucide-react';
+import { FileKey, Copy } from 'lucide-react';
 
 const HashGenerator = () => {
   const [input, setInput] = useState('');
@@ -8,19 +8,19 @@ const HashGenerator = () => {
 
   const generateHashes = async () => {
     if (!input.trim()) return;
-    
+
     const enc = new TextEncoder();
     const data = enc.encode(input);
-    
-    const sha256 = await crypto.subtle.digest('SHA-256', data).then(b => bufferToHex(b));
-    const sha384 = await crypto.subtle.digest('SHA-384', data).then(b => bufferToHex(b));
-    const sha512 = await crypto.subtle.digest('SHA-512', data).then(b => bufferToHex(b));
-    
+
+    const sha256 = await crypto.subtle.digest('SHA-256', data).then((buffer) => bufferToHex(buffer));
+    const sha384 = await crypto.subtle.digest('SHA-384', data).then((buffer) => bufferToHex(buffer));
+    const sha512 = await crypto.subtle.digest('SHA-512', data).then((buffer) => bufferToHex(buffer));
+
     setHashes({ SHA256: sha256, SHA384: sha384, SHA512: sha512 });
   };
 
   const bufferToHex = (buffer) => {
-    return [...new Uint8Array(buffer)].map(x => x.toString(16).padStart(2, '0')).join('');
+    return [...new Uint8Array(buffer)].map((value) => value.toString(16).padStart(2, '0')).join('');
   };
 
   const copy = (hash) => {
@@ -60,12 +60,12 @@ const HashGenerator = () => {
               <div key={type} className="bg-black/40 border border-white/5 rounded-xl p-3 flex flex-col gap-1">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[10px] font-mono text-primary uppercase">{type}</span>
-                  <button onClick={() => copy(hashes[type])} className="text-muted hover:text-white transition-colors">
+                  <button onClick={() => hashes[type] && copy(hashes[type])} className="text-muted hover:text-white transition-colors" disabled={!hashes[type]}>
                     {copied === hashes[type] ? <span className="text-green-500 text-[10px]">COPIED</span> : <Copy className="w-3 h-3" />}
                   </button>
                 </div>
                 <code className="text-[10px] font-mono text-muted break-all">
-                  {hashes[type] || '—'}
+                  {hashes[type] || 'Pending'}
                 </code>
               </div>
             ))}

@@ -1,93 +1,113 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, Volume2, VolumeX } from 'lucide-react';
 
-const BEEP_DATA = "data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU9vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT18=";
+const BEEP_DATA = "data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU9vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT18=";
+const DEFAULT_TIMER = { h: 0, m: 5, s: 0, total: 300 };
+
+const loadSavedTimer = () => {
+  if (typeof window === 'undefined') return DEFAULT_TIMER;
+
+  try {
+    const raw = window.localStorage.getItem('void_timer_v2');
+    if (!raw) return DEFAULT_TIMER;
+
+    const saved = JSON.parse(raw);
+    return {
+      h: Number.isFinite(saved.h) ? saved.h : DEFAULT_TIMER.h,
+      m: Number.isFinite(saved.m) ? saved.m : DEFAULT_TIMER.m,
+      s: Number.isFinite(saved.s) ? saved.s : DEFAULT_TIMER.s,
+      total: Number.isFinite(saved.total) ? saved.total : DEFAULT_TIMER.total,
+    };
+  } catch {
+    return DEFAULT_TIMER;
+  }
+};
+
+const splitSeconds = (totalSeconds) => {
+  const clamped = Math.max(0, totalSeconds);
+  const hours = Math.floor(clamped / 3600);
+  const minutes = Math.floor((clamped % 3600) / 60);
+  const seconds = clamped % 60;
+
+  return { hours, minutes, seconds };
+};
 
 const Timer = () => {
-  const [hh, setHh] = useState(0);
-  const [mm, setMm] = useState(5);
-  const [ss, setSs] = useState(0);
+  const savedTimer = loadSavedTimer();
+  const initialRemaining = (savedTimer.h * 3600) + (savedTimer.m * 60) + savedTimer.s;
+
+  const [remainingSeconds, setRemainingSeconds] = useState(initialRemaining);
+  const [configuredSeconds, setConfiguredSeconds] = useState(savedTimer.total || initialRemaining || DEFAULT_TIMER.total);
   const [isActive, setIsActive] = useState(false);
-  const [progress, setProgress] = useState(100);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [isEditing, setIsEditing] = useState(null); // 'hh', 'mm', 'ss'
-  
-  const totalSecondsRef = useRef(300);
-  const initialSecondsRef = useRef(300);
+  const [isEditing, setIsEditing] = useState(null);
   const audioRef = useRef(null);
 
-  // Load state from local storage
-  useEffect(() => {
-    const saved = localStorage.getItem('void_timer_v2');
-    if (saved) {
-      const { h, m, s, total } = JSON.parse(saved);
-      setHh(h); setMm(m); setSs(s);
-      totalSecondsRef.current = total;
-      initialSecondsRef.current = total;
-    }
-  }, []);
+  const { hours: hh, minutes: mm, seconds: ss } = splitSeconds(remainingSeconds);
+  const progress = configuredSeconds > 0 ? Math.max(0, (remainingSeconds / configuredSeconds) * 100) : 0;
 
-  // Save state to local storage
   useEffect(() => {
-    localStorage.setItem('void_timer_v2', JSON.stringify({
-      h: hh, m: mm, s: ss, total: initialSecondsRef.current
+    if (typeof window === 'undefined') return;
+
+    window.localStorage.setItem('void_timer_v2', JSON.stringify({
+      h: hh,
+      m: mm,
+      s: ss,
+      total: configuredSeconds,
     }));
-  }, [hh, mm, ss]);
+  }, [hh, mm, ss, configuredSeconds]);
 
   useEffect(() => {
-    let interval = null;
-    if (isActive && (hh > 0 || mm > 0 || ss > 0)) {
-      interval = setInterval(() => {
-        let nH = hh, nM = mm, nS = ss;
-        
-        if (nS > 0) nS--;
-        else if (nM > 0) { nM--; nS = 59; }
-        else if (nH > 0) { nH--; nM = 59; nS = 59; }
+    if (!isActive || remainingSeconds === 0) return undefined;
 
-        setHh(nH); setMm(nM); setSs(nS);
-        
-        const remaining = nH * 3600 + nM * 60 + nS;
-        setProgress((remaining / initialSecondsRef.current) * 100);
-      }, 1000);
-    } else if (hh === 0 && mm === 0 && ss === 0 && isActive) {
-      setIsActive(false);
-      clearInterval(interval);
-      if (soundEnabled) audioRef.current.play().catch(e => console.log('Audio blocked'));
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isActive, hh, mm, ss, soundEnabled]);
+    const interval = window.setInterval(() => {
+      setRemainingSeconds((prev) => {
+        if (prev <= 1) {
+          window.clearInterval(interval);
+          setIsActive(false);
+          if (soundEnabled) {
+            audioRef.current?.play().catch(() => {});
+          }
+          return 0;
+        }
+
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [isActive, remainingSeconds, soundEnabled]);
 
   const toggle = () => {
-    if (!isActive && hh === 0 && mm === 0 && ss === 0) return;
-    if (!isActive) {
-        const total = hh * 3600 + mm * 60 + ss;
-        initialSecondsRef.current = total;
-    }
-    setIsActive(!isActive);
+    if (!isActive && remainingSeconds === 0) return;
+    if (!isActive) setConfiguredSeconds(remainingSeconds);
+    setIsActive((prev) => !prev);
     setIsEditing(null);
   };
 
   const reset = () => {
+    const saved = loadSavedTimer();
     setIsActive(false);
-    const { h, m, s, total } = JSON.parse(localStorage.getItem('void_timer_v2') || '{"h":0,"m":5,"s":0,"total":300}');
-    setHh(h); setMm(m); setSs(s);
-    setProgress(100);
-    initialSecondsRef.current = total;
+    setRemainingSeconds((saved.h * 3600) + (saved.m * 60) + saved.s);
+    setConfiguredSeconds(saved.total);
+    setIsEditing(null);
   };
 
   const handleEdit = (type, val) => {
     if (isActive) return;
-    const n = Math.max(0, Math.min(type === 'hh' ? 99 : 59, parseInt(val) || 0));
-    if (type === 'hh') setHh(n);
-    if (type === 'mm') setMm(n);
-    if (type === 'ss') setSs(n);
-    // Note: initialSecondsRef is updated on Start
+
+    const nextValue = Math.max(0, Math.min(type === 'hh' ? 99 : 59, parseInt(val, 10) || 0));
+    const next = { hh, mm, ss };
+    next[type] = nextValue;
+
+    const nextTotal = (next.hh * 3600) + (next.mm * 60) + next.ss;
+    setRemainingSeconds(nextTotal);
+    setConfiguredSeconds(nextTotal);
   };
 
   const renderDigit = (type, val) => {
     const isThisEditing = isEditing === type;
+
     return (
       <div className="relative group">
         {isThisEditing ? (
@@ -101,7 +121,7 @@ const Timer = () => {
             onKeyDown={(e) => e.key === 'Enter' && setIsEditing(null)}
           />
         ) : (
-          <button 
+          <button
             onClick={() => !isActive && setIsEditing(type)}
             className={`font-mono text-3xl font-bold transition-all ${isActive ? 'text-white' : 'text-primary/60 hover:text-primary'}`}
           >
@@ -115,17 +135,27 @@ const Timer = () => {
   return (
     <div className="p-6 bg-surface/50 backdrop-blur-sm rounded-3xl border border-white/5 h-full flex flex-col items-center justify-center relative overflow-hidden group">
       <audio ref={audioRef} src={BEEP_DATA} />
-      
+
       <div className="absolute top-4 right-4 z-10">
         <button onClick={() => setSoundEnabled(!soundEnabled)} className="p-1.5 text-muted hover:text-primary transition-colors bg-black/40 rounded-full border border-white/5">
-            {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
+          {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
         </button>
       </div>
 
       <div className="relative w-40 h-40 flex items-center justify-center mb-6">
         <svg className="w-full h-full transform -rotate-90">
           <circle cx="80" cy="80" r="75" stroke="currentColor" strokeWidth="3" fill="transparent" className="text-white/5" />
-          <circle cx="80" cy="80" r="75" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray={471} strokeDashoffset={471 - (471 * progress) / 100} className={`transition-all duration-1000 ${hh === 0 && mm === 0 && ss < 10 && isActive ? 'text-red-500' : 'text-primary'}`} />
+          <circle
+            cx="80"
+            cy="80"
+            r="75"
+            stroke="currentColor"
+            strokeWidth="4"
+            fill="transparent"
+            strokeDasharray={471}
+            strokeDashoffset={471 - (471 * progress) / 100}
+            className={`transition-all duration-1000 ${hh === 0 && mm === 0 && ss < 10 && isActive ? 'text-red-500' : 'text-primary'}`}
+          />
         </svg>
         <div className="absolute flex items-center gap-1">
           {renderDigit('hh', hh)}
@@ -137,7 +167,7 @@ const Timer = () => {
       </div>
 
       <div className="flex gap-4 mb-6">
-        <button 
+        <button
           onClick={toggle}
           className={`w-14 h-14 rounded-full flex items-center justify-center transition-all ${isActive ? 'bg-orange-500/20 text-orange-500 hover:bg-orange-500/30' : 'bg-primary text-[#030304] hover:scale-105 shadow-gold-glow'}`}
         >
@@ -150,7 +180,7 @@ const Timer = () => {
       </button>
 
       {!isActive && (
-          <p className="mt-4 text-[8px] font-mono text-primary/30 uppercase tracking-tighter">Click digits to edit</p>
+        <p className="mt-4 text-[8px] font-mono text-primary/30 uppercase tracking-tighter">Click digits to edit</p>
       )}
     </div>
   );
