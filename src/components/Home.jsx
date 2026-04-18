@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Disc, Terminal, PlayCircle, Zap, FileText, Palette, Hammer } from 'lucide-react';
+import { Mail, Disc, Terminal, PlayCircle, Zap, FileText, Palette, Hammer, Cpu } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 
@@ -30,12 +30,15 @@ const Home = () => {
           Building precise web experiences with a soft spot for preservation projects and playful interfaces.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-6 items-center">
-          <Button href="/tools" variant="primary" className="h-14 px-10 text-base shadow-gold-glow hover:scale-105 transition-all">
+        <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-6 items-center w-full">
+          <Button href="/tools" variant="primary" className="h-14 px-8 text-base shadow-gold-glow hover:scale-105 transition-all">
             <Hammer className="w-5 h-5 mr-3" /> Launch Toolbox
           </Button>
-          <Button href="/games" variant="outline" className="h-14 px-10 text-base border-white/10 hover:border-white/40 hover:bg-white/5">
+          <Button href="/games" variant="outline" className="h-14 px-8 text-base border-white/10 hover:border-white/40 hover:bg-white/5">
             <PlayCircle className="w-5 h-5 mr-3" /> Enter Arcade
+          </Button>
+          <Button href="/oracle" variant="outline" className="h-14 px-8 text-base border-tertiary/40 text-tertiary hover:border-tertiary hover:bg-tertiary/10 transition-all hover:-translate-y-1">
+            <Cpu className="w-5 h-5 mr-3" /> Access The Oracle
           </Button>
         </div>
 
