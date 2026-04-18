@@ -23,6 +23,7 @@ export const searchItems = [
   { title: 'Digital Timer', path: '/tools#timer', category: 'Tool', icon: 'Timer', keywords: ['countdown', 'focus', 'timer'] },
   { title: 'Clock', path: '/tools#clock', category: 'Tool', icon: 'Clock', keywords: ['time', 'clock'] },
   { title: 'JWT Decoder', path: '/tools#jwt-decoder', category: 'Tool', icon: 'Key', keywords: ['jwt', 'token', 'decode', 'json'] },
+  { title: 'The Oracle (AI)', path: '/tools#the-oracle', category: 'Tool', icon: 'Cpu', keywords: ['ai', 'oracle', 'chat', 'bot', 'terminal', 'llama'] },
 
   // Social / External
   { title: 'GitHub Repository', path: 'https://github.com/sohamd008', category: 'External', icon: 'Github' },
