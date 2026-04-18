@@ -48,8 +48,8 @@ const TheOracle = () => {
   };
 
   return (
-    <div className="h-[500px] w-full border border-tertiary/20 rounded-2xl shadow-[-10px_10px_30px_-5px_rgba(var(--tertiary),0.1)] relative overflow-hidden group flex flex-col bg-black/80 backdrop-blur-lg">
-      <div className="border-b border-tertiary/10 bg-tertiary/5 px-6 py-4 flex-shrink-0">
+    <div className="h-[500px] w-full glass-card relative overflow-hidden group flex flex-col">
+      <div className="border-b border-white/[0.06] bg-white/[0.02] px-6 py-4 flex-shrink-0 backdrop-blur-xl">
         <h2 className="flex items-center gap-2 text-tertiary text-glow font-mono uppercase tracking-widest text-sm m-0">
           <Cpu className="w-5 h-5 text-tertiary" /> The Oracle [AI]
         </h2>
@@ -87,7 +87,7 @@ const TheOracle = () => {
           <div ref={endRef} />
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 border-t border-tertiary/10 shrink-0 bg-black/60 flex items-center gap-3">
+        <form onSubmit={handleSubmit} className="p-4 border-t border-white/[0.06] shrink-0 bg-white/[0.02] backdrop-blur-xl flex items-center gap-3">
           <TerminalSquare className="w-6 h-6 text-tertiary/50 shrink-0" />
           <input
             type="text"

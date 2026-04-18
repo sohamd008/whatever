@@ -133,7 +133,7 @@ const Timer = () => {
   };
 
   return (
-    <div className="p-6 bg-surface/50 backdrop-blur-sm rounded-3xl border border-white/5 h-full flex flex-col items-center justify-center relative overflow-hidden group">
+    <div className="p-6 glass-card rounded-3xl h-full flex flex-col items-center justify-center relative overflow-hidden group">
       <audio ref={audioRef} src={BEEP_DATA} />
 
       <div className="absolute top-4 right-4 z-10">

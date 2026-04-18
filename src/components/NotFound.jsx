@@ -28,19 +28,21 @@ const NotFound = () => {
         </div>
       </div>
 
-      <h2 className="text-2xl md:text-4xl font-bold font-heading text-white mb-4 animate-bounce">
-        Houston, we have a problem.
-      </h2>
-      <p className="text-muted font-mono max-w-md mx-auto mb-10 text-sm md:text-base leading-relaxed">
-        The coordinates you entered lead to an empty sector of the void. 
-        The data has either been lost, or it was eaten by a black hole.
-      </p>
+      <div className="glass-card p-8 md:p-12 max-w-lg mx-auto">
+        <h2 className="text-2xl md:text-4xl font-bold font-heading text-white mb-4">
+          Houston, we have a problem.
+        </h2>
+        <p className="text-muted font-mono max-w-md mx-auto mb-10 text-sm md:text-base leading-relaxed opacity-70">
+          The coordinates you entered lead to an empty sector. 
+          The data has either been lost, or it was eaten by a black hole.
+        </p>
 
-      {/* Button with funny hover effect */}
-      <div className="relative inline-block">
-        <Button href="/" variant="primary" className="mx-auto flex relative z-20">
-          RETURN TO BASE
-        </Button>
+        {/* Button */}
+        <div className="relative inline-block">
+          <Button href="/" variant="primary" className="mx-auto flex relative z-20">
+            RETURN TO BASE
+          </Button>
+        </div>
       </div>
 
       {/* CSS Animation for Debris */}
@@ -58,7 +60,7 @@ const NotFound = () => {
          {debris.map((item, i) => (
            <div 
              key={i}
-             className="absolute text-white/10 font-mono font-bold whitespace-nowrap"
+             className="absolute text-white/[0.06] font-mono font-bold whitespace-nowrap"
              style={{
                left: `${item.x}%`,
                bottom: `-20%`,

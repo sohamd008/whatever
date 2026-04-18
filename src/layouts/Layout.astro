@@ -85,6 +85,13 @@ const imageUrl = new URL(image, Astro.url.origin).toString();
     <div class="relative min-h-screen selection:bg-primary/30 selection:text-white bg-background text-foreground">
       <ConstellationBackground client:idle />
       <CommandPalette client:idle />
+
+      <!-- Global ambient orbs for depth -->
+      <div class="fixed inset-0 pointer-events-none overflow-hidden z-[1]">
+        <div class="ambient-orb w-[600px] h-[600px] bg-primary/15 top-[-200px] left-[-100px]"></div>
+        <div class="ambient-orb w-[500px] h-[500px] bg-tertiary/10 bottom-[-150px] right-[-100px]" style="animation-delay: 3s;"></div>
+        <div class="ambient-orb w-[400px] h-[400px] bg-secondary/10 top-[40%] right-[-200px]" style="animation-delay: 1.5s;"></div>
+      </div>
       
       <div class="relative z-10 antialiased font-body flex flex-col min-h-screen">
         
@@ -94,22 +101,25 @@ const imageUrl = new URL(image, Astro.url.origin).toString();
               <a href="/" class="font-heading font-bold text-2xl tracking-tighter text-white hover:opacity-80 transition-opacity">
                 SD<span class="text-primary">.</span>
               </a>
-              <div class="hidden lg:flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-mono text-muted/40">
-                <span class="px-1 bg-white/10 rounded">CTRL</span> + <span class="px-1 bg-white/10 rounded">K</span> TO SEARCH
+              <div class="hidden lg:flex items-center gap-2 px-3 py-1 bg-white/[0.04] border border-white/[0.08] rounded-full text-[10px] font-mono text-muted/40 backdrop-blur-md">
+                <span class="px-1 bg-white/[0.08] rounded">CTRL</span> + <span class="px-1 bg-white/[0.08] rounded">K</span> TO SEARCH
               </div>
             </div>
-            <nav class="flex items-center gap-6 md:gap-8 bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/10">
+            <nav class="flex items-center gap-6 md:gap-8 bg-white/[0.04] backdrop-blur-2xl px-6 py-3 rounded-full border border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)]">
               {pathname === "/" ? (
                 <>
-                  <a href="#projects" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">PROJECTS</a>
-                  <a href="#contact" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors">CONTACT</a>
+                  <a href="#projects" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors duration-300">PROJECTS</a>
+                  <a href="#contact" class="text-xs md:text-sm font-mono tracking-wider text-muted hover:text-primary transition-colors duration-300">CONTACT</a>
                 </>
               ) : null}
-              <a href="/toolbox" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors ${pathname === "/toolbox" ? "text-primary font-bold" : "text-muted"}`}>
+              <a href="/tools" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors duration-300 ${pathname === "/tools" ? "text-primary font-bold" : "text-muted"}`}>
                 TOOLBOX
               </a>
-              <a href="/games" class={`text-xs md:text-sm font-mono tracking-wider hover:text-tertiary transition-colors ${pathname === "/games" || pathname.startsWith("/games/") ? "text-tertiary font-bold" : "text-muted"}`}>
+              <a href="/games" class={`text-xs md:text-sm font-mono tracking-wider hover:text-tertiary transition-colors duration-300 ${pathname === "/games" || pathname.startsWith("/games/") ? "text-tertiary font-bold" : "text-muted"}`}>
                 ARCADE
+              </a>
+              <a href="/oracle" class={`text-xs md:text-sm font-mono tracking-wider hover:text-primary transition-colors duration-300 ${pathname === "/oracle" ? "text-primary font-bold" : "text-muted"}`}>
+                ORACLE
               </a>
             </nav>
           </header>
@@ -119,8 +129,8 @@ const imageUrl = new URL(image, Astro.url.origin).toString();
         <slot />
         
         {!hideHeaderFooter && (
-          <footer class="mt-auto border-t border-white/10 bg-[#030304]/80 backdrop-blur-md py-8 relative z-50">
-            <div class="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center text-sm font-mono text-muted">
+          <footer class="mt-auto border-t border-white/[0.06] bg-white/[0.02] backdrop-blur-xl py-8 relative z-50">
+            <div class="container mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center text-sm font-mono text-muted/60">
               <p>&copy; {currentYear} Soham Dandekar. All rights reserved.</p>
               <p class="mt-2 md:mt-0">Engineered with precision.</p>
             </div>

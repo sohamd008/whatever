@@ -88,7 +88,7 @@ const SortableNoteItem = ({ note, isActive, onClick, onDelete, onPin, onColorCha
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative group mb-2 rounded-2xl transition-all duration-300 ${isActive ? 'bg-primary/15 border-primary/30 ring-1 ring-primary/20' : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'} border`}
+      className={`relative group mb-2 rounded-2xl transition-all duration-300 ${isActive ? 'bg-primary/10 border-primary/20 ring-1 ring-primary/20' : 'bg-white/[0.04] border-transparent hover:bg-white/[0.06] hover:border-white/[0.08]'} border`}
     >
       <div className="flex items-center gap-3 p-3">
         <div
@@ -125,7 +125,7 @@ const SortableNoteItem = ({ note, isActive, onClick, onDelete, onPin, onColorCha
       {showMenu && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setShowMenu(false)} />
-          <div className="absolute right-2 top-full mt-1 w-48 bg-background/95 backdrop-blur-xl border border-white/10 rounded-2xl p-2 z-50 shadow-2xl animate-in fade-in zoom-in duration-200">
+          <div className="absolute right-2 top-full mt-1 w-48 bg-white/[0.04] backdrop-blur-2xl border border-white/[0.1] rounded-2xl p-2 z-50 shadow-[0_8px_40px_rgba(0,0,0,0.5)] animate-in fade-in zoom-in duration-200">
             <div className="flex flex-col gap-1">
               <button
                 onClick={(e) => { e.stopPropagation(); onPin(note.id); setShowMenu(false); }}
@@ -300,10 +300,10 @@ const Notepad = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-surface/40 backdrop-blur-3xl rounded-[2.5rem] border border-white/5 overflow-hidden min-h-[500px] shadow-2xl relative select-none">
-      <div className="px-6 py-4 bg-black/60 border-b border-white/10 flex justify-between items-center z-40">
+    <div className="flex flex-col h-full bg-white/[0.03] backdrop-blur-2xl rounded-[2.5rem] border border-white/[0.08] overflow-hidden min-h-[500px] shadow-[0_4px_30px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.05)] relative select-none">
+      <div className="px-6 py-4 bg-white/[0.02] border-b border-white/[0.06] flex justify-between items-center z-40 backdrop-blur-xl">
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/5">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.04] rounded-full border border-white/[0.06]">
             {isOnline ? <Wifi className="w-3 h-3 text-green-500" /> : <WifiOff className="w-3 h-3 text-red-500 animate-pulse" />}
             <span className="text-[9px] font-mono tracking-widest text-muted">{isOnline ? 'ONLINE' : 'OFFLINE'}</span>
           </div>
@@ -331,7 +331,7 @@ const Notepad = () => {
       </div>
 
       <div className="flex flex-grow relative overflow-hidden">
-        <div className={`absolute inset-y-0 left-0 w-80 bg-background/98 backdrop-blur-2xl border-r border-white/10 z-50 transition-all duration-500 ease-in-out transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} p-6 flex flex-col`}>
+        <div className={`absolute inset-y-0 left-0 w-80 bg-white/[0.03] backdrop-blur-2xl border-r border-white/[0.08] z-50 transition-all duration-500 ease-in-out transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} p-6 flex flex-col`}>
           <div className="flex justify-between items-center mb-6">
             <div>
               <h4 className="text-[10px] font-mono font-bold tracking-[0.3em] text-primary uppercase">Segment Archive</h4>

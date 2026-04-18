@@ -37,7 +37,7 @@ const RegexTester = () => {
   };
 
   return (
-    <div className="p-6 bg-surface/50 backdrop-blur-sm rounded-2xl border border-white/5 h-full flex flex-col">
+    <div className="p-6 glass-card h-full flex flex-col">
       <div className="flex items-center gap-3 mb-6">
         <AlertCircle className="w-5 h-5 text-primary" />
         <h3 className="font-heading font-bold text-lg text-white">REGEX TEST</h3>

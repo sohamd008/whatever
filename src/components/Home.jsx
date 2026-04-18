@@ -14,7 +14,7 @@ const Home = () => {
     <>
       {/* Hero Section */}
       <main className="flex-grow flex flex-col items-center justify-center container mx-auto max-w-7xl px-6 py-28 text-center animate-fadeInUp">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 mb-10 animate-float backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] mb-10 animate-float backdrop-blur-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
             <span className="w-2 h-2 rounded-full bg-primary animate-ping block absolute"></span>
             <span className="w-2 h-2 rounded-full bg-primary block relative z-10"></span>
             <span className="text-[10px] font-mono font-bold text-primary tracking-[0.3em] pl-2 uppercase">Systems Online // 2026</span>
@@ -34,31 +34,31 @@ const Home = () => {
           <Button href="/tools" variant="primary" className="h-14 px-8 text-base shadow-gold-glow hover:scale-105 transition-all">
             <Hammer className="w-5 h-5 mr-3" /> Launch Toolbox
           </Button>
-          <Button href="/games" variant="outline" className="h-14 px-8 text-base border-white/10 hover:border-white/40 hover:bg-white/5">
+          <Button href="/games" variant="outline" className="h-14 px-8 text-base">
             <PlayCircle className="w-5 h-5 mr-3" /> Enter Arcade
           </Button>
-          <Button href="/oracle" variant="outline" className="h-14 px-8 text-base border-tertiary/40 text-tertiary hover:border-tertiary hover:bg-tertiary/10 transition-all hover:-translate-y-1">
+          <Button href="/oracle" variant="outline" className="h-14 px-8 text-base border-tertiary/20 text-tertiary hover:border-tertiary/40 hover:bg-tertiary/[0.06]">
             <Cpu className="w-5 h-5 mr-3" /> Access The Oracle
           </Button>
         </div>
 
         {/* Scannable Feature Grid */}
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 w-full opacity-60">
-            <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
                 <Zap className="w-5 h-5 text-primary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">URL Shortener</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">URL Shortener</span>
             </div>
-            <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
                 <FileText className="w-5 h-5 text-tertiary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Local Notes</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Local Notes</span>
             </div>
-            <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
                 <Palette className="w-5 h-5 text-primary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Color Tools</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Color Tools</span>
             </div>
-            <div className="flex flex-col items-center gap-2 p-4 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm">
+            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
                 <Terminal className="w-5 h-5 text-tertiary" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-muted">Link Console</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Link Console</span>
             </div>
         </div>
       </main>
@@ -73,14 +73,14 @@ const Home = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <Card className="flex flex-col h-full relative overflow-hidden group border-white/5 hover:border-primary/20 transition-all duration-500">
+          <Card className="flex flex-col h-full relative overflow-hidden group">
             {/* Decorative background icon */}
-            <div className="absolute -right-12 -bottom-12 opacity-[0.02] group-hover:opacity-10 transition-all duration-700 transform group-hover:rotate-[30deg] group-hover:scale-125">
+            <div className="absolute -right-12 -bottom-12 opacity-[0.02] group-hover:opacity-[0.06] transition-all duration-700 transform group-hover:rotate-[30deg] group-hover:scale-125">
               <Disc className="w-80 h-80 text-primary" />
             </div>
             
             <div className="flex-grow relative z-10 p-2">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-tertiary/10 border border-primary/20 flex items-center justify-center mb-8 shadow-inner ring-1 ring-white/5">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-tertiary/10 border border-primary/20 flex items-center justify-center mb-8 shadow-inner ring-1 ring-white/[0.05]">
                 <Disc className="w-7 h-7 text-primary animate-pulse" />
               </div>
               
@@ -90,7 +90,7 @@ const Home = () => {
               </p>
             </div>
             
-            <div className="mt-auto pt-8 border-t border-white/5 relative z-10 flex items-center justify-between">
+            <div className="mt-auto pt-8 border-t border-white/[0.06] relative z-10 flex items-center justify-between">
               <a 
                 href="https://swaramanjusha.eu.org" 
                 target="_blank" 
@@ -102,7 +102,7 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </a>
-              <div className="px-2 py-1 bg-white/5 border border-white/5 rounded-md text-[8px] font-mono text-muted/30 uppercase tracking-widest italic">Live Instance</div>
+              <div className="px-2 py-1 bg-white/[0.04] border border-white/[0.06] rounded-md text-[8px] font-mono text-muted/30 uppercase tracking-widest italic">Live Instance</div>
             </div>
           </Card>
         </div>
@@ -110,8 +110,8 @@ const Home = () => {
 
       {/* Global Connectivity / Contact Section */}
       <section id="contact" className="container mx-auto max-w-7xl px-6 py-32 mb-20 animate-fadeInUp" style={{ animationDelay: '0.4s', opacity: 0 }}>
-        <Card glass className="text-center py-20 px-10 max-w-5xl mx-auto relative overflow-hidden group shadow-2xl border-white/5 rounded-[3rem]">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px] -z-10 group-hover:bg-primary/30 transition-all duration-1000 animate-pulse"></div>
+        <Card glass className="text-center py-20 px-10 max-w-5xl mx-auto relative overflow-hidden group shadow-2xl rounded-[3rem]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[120px] -z-10 group-hover:bg-primary/20 transition-all duration-1000 animate-pulse"></div>
             
             <h2 className="font-heading font-black text-4xl md:text-7xl text-white mb-8 tracking-tighter uppercase italic">
               Ready for <span className="text-tertiary">Deployment?</span>
@@ -125,7 +125,7 @@ const Home = () => {
                 <Mail className="w-5 h-5 mr-4" />
                 Connectivity
               </Button>
-              <Button href="https://github.com/sohamd008" variant="outline" className="h-16 px-10 text-lg border-white/10">
+              <Button href="https://github.com/sohamd008" variant="outline" className="h-16 px-10 text-lg">
                 <GithubIcon className="w-5 h-5 mr-4" />
                 Repository
               </Button>

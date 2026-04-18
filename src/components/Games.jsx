@@ -5,11 +5,13 @@ import GameCard from '../components/games/GameCard';
 const Games = () => {
   return (
     <main className="flex-grow flex flex-col py-24 animate-fadeInUp">
-      <div className="container mx-auto max-w-7xl px-6 mb-16 text-center">
-        <h1 className="font-heading font-extrabold text-5xl md:text-7xl text-white mb-6">
+      <div className="container mx-auto max-w-7xl px-6 mb-16 text-center relative">
+        {/* Ambient glow behind title */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <h1 className="font-heading font-extrabold text-5xl md:text-7xl text-white mb-6 relative">
           The <span className="bg-gradient-to-r from-primary to-tertiary bg-clip-text text-transparent text-glow">Arcade</span>
         </h1>
-        <p className="text-muted text-lg max-w-2xl mx-auto">
+        <p className="text-muted text-lg max-w-2xl mx-auto relative">
           Enter the grid. {gamesList.length} original games built from scratch, with autoplay modes and AI challengers across most titles.
         </p>
       </div>

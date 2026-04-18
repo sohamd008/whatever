@@ -161,8 +161,8 @@ const CommandPalette = () => {
         }}
       />
 
-      <div className="relative w-full max-w-2xl bg-surface/90 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-2xl pointer-events-auto overflow-hidden animate-zoomIn">
-        <div className="flex items-center px-4 border-b border-white/5 bg-black/20">
+      <div className="relative w-full max-w-2xl bg-white/[0.04] backdrop-blur-3xl border border-white/[0.1] rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.06)] pointer-events-auto overflow-hidden animate-zoomIn">
+        <div className="flex items-center px-4 border-b border-white/[0.06] bg-white/[0.02]">
           <Search className="w-5 h-5 text-muted/50" />
           <input
             ref={inputRef}
@@ -177,7 +177,7 @@ const CommandPalette = () => {
             }}
             onKeyDown={handleNav}
           />
-          <div className="flex items-center gap-1 px-2 py-1 bg-white/5 rounded-lg border border-white/10">
+          <div className="flex items-center gap-1 px-2 py-1 bg-white/[0.04] rounded-lg border border-white/[0.08]">
             <span className="text-[10px] font-mono text-muted/40 uppercase">ESC TO CLOSE</span>
           </div>
         </div>
@@ -186,7 +186,7 @@ const CommandPalette = () => {
           {showHelp ? (
             <div className="grid gap-3 sm:grid-cols-2">
               {HELP_CARDS.map((card) => (
-                <div key={card.title} className="rounded-xl border border-white/10 bg-black/20 p-4">
+                <div key={card.title} className="rounded-xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl p-4">
                   <p className="mb-2 text-[10px] font-mono uppercase tracking-[0.25em] text-primary">{card.title}</p>
                   <div className="space-y-2 text-sm text-white/80">
                     {card.lines.map((line) => (
@@ -207,9 +207,9 @@ const CommandPalette = () => {
                     key={item.title + item.path}
                     onClick={() => openItem(item)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 text-left relative group ${isSelected ? 'bg-primary/20 border-primary/20' : 'bg-transparent border-transparent'}`}
+                    className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 text-left relative group ${isSelected ? 'bg-primary/10 border border-primary/20 backdrop-blur-sm' : 'bg-transparent border border-transparent hover:bg-white/[0.03]'}`}
                   >
-                    <div className={`p-2.5 rounded-xl border transition-all ${isSelected ? 'bg-primary/20 border-primary/40 text-primary shadow-gold-glow' : 'bg-white/5 border-white/5 text-muted group-hover:text-white'}`}>
+                    <div className={`p-2.5 rounded-xl border transition-all ${isSelected ? 'bg-primary/20 border-primary/30 text-primary shadow-gold-glow' : 'bg-white/[0.04] border-white/[0.06] text-muted group-hover:text-white'}`}>
                       <Icon className="w-5 h-5" />
                     </div>
 
@@ -241,19 +241,19 @@ const CommandPalette = () => {
           )}
         </div>
 
-        <div className="px-6 py-4 bg-black/40 border-t border-white/5 flex justify-between items-center">
+        <div className="px-6 py-4 bg-white/[0.02] border-t border-white/[0.06] flex justify-between items-center backdrop-blur-xl">
           <div className="flex gap-4">
             <div className="flex items-center gap-2">
-              <kbd className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-muted font-bold">UP/DOWN</kbd>
+              <kbd className="px-2 py-1 bg-white/[0.04] border border-white/[0.08] rounded text-[10px] font-mono text-muted font-bold">UP/DOWN</kbd>
               <span className="text-[10px] text-muted/30 uppercase tracking-tighter font-mono">Navigate</span>
             </div>
             <div className="flex items-center gap-2">
-              <kbd className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] font-mono text-muted font-bold">ENTER</kbd>
+              <kbd className="px-2 py-1 bg-white/[0.04] border border-white/[0.08] rounded text-[10px] font-mono text-muted font-bold">ENTER</kbd>
               <span className="text-[10px] text-muted/30 uppercase tracking-tighter font-mono">Select</span>
             </div>
           </div>
-          <div className="text-[10px] font-mono text-primary/40 uppercase tracking-[0.2em] font-black animate-pulse">
-            Void System OS_v1.0
+          <div className="text-[10px] font-mono text-muted/20 uppercase tracking-[0.2em]">
+            soham.eu.cc
           </div>
         </div>
       </div>

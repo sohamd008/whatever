@@ -118,7 +118,7 @@ const TerminalManager = () => {
 
   if (!auth) {
     return (
-      <div className="max-w-md mx-auto mt-20 p-8 border border-green-900/40 bg-green-900/5 rounded-2xl backdrop-blur-md">
+      <div className="max-w-md mx-auto mt-20 p-8 glass-card">
         <div className="flex flex-col items-center text-center mb-8">
           <div className="w-16 h-16 bg-green-900/20 rounded-full flex items-center justify-center mb-4 border border-green-500/20">
             <Lock className="w-8 h-8 text-green-500 animate-pulse" />
@@ -145,7 +145,7 @@ const TerminalManager = () => {
         </form>
 
         {error && (
-          <div className="mt-4 flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-[10px] font-mono text-amber-300">
+          <div className="mt-4 flex items-start gap-2 rounded-lg glass-card p-3 text-[10px] font-mono text-amber-300">
             <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0" />
             <span>{error}</span>
           </div>
@@ -200,7 +200,7 @@ const TerminalManager = () => {
         )}
 
         {links.map((link) => (
-          <div key={link.slug} className="group flex items-center justify-between p-4 bg-green-900/5 border border-green-900/20 rounded-xl hover:border-green-500/30 transition-all">
+          <div key={link.slug} className="group flex items-center justify-between p-4 glass-card hover:border-green-500/20 transition-all">
             <div className="flex items-center gap-6 overflow-hidden">
               <div className="flex flex-col min-w-[120px]">
                 <div className="flex items-center gap-1.5 text-green-300 font-bold">

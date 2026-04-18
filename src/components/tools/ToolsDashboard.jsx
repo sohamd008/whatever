@@ -20,11 +20,12 @@ const ToolsDashboard = () => {
   return (
     <div className="container mx-auto max-w-7xl px-6 py-12">
       {/* Header */}
-      <div className="mb-12 text-center animate-fadeInUp">
-        <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-4">
+      <div className="mb-12 text-center animate-fadeInUp relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <h1 className="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-4 relative">
           The <span className="text-primary text-glow">Void</span> Toolbox
         </h1>
-        <p className="text-muted text-lg max-w-2xl mx-auto font-body">
+        <p className="text-muted text-lg max-w-2xl mx-auto font-body relative opacity-80">
           A local-first cluster of productivity and developer utilities, with a few network-backed helpers where they add real value.
         </p>
       </div>
@@ -95,7 +96,7 @@ const ToolsDashboard = () => {
       </div>
 
       {/* Secondary Tools Footer */}
-      <div className="mt-16 pt-8 border-t border-border/30 flex flex-wrap justify-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
+      <div className="mt-16 pt-8 border-t border-white/[0.06] flex flex-wrap justify-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-tighter text-muted">
              <Settings className="w-3 h-3" /> System Optimized
          </div>
