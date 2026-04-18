@@ -31,7 +31,7 @@ const Home = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 items-center">
-          <Button href="/toolbox" variant="primary" className="h-14 px-10 text-base shadow-gold-glow hover:scale-105 transition-all">
+          <Button href="/tools" variant="primary" className="h-14 px-10 text-base shadow-gold-glow hover:scale-105 transition-all">
             <Hammer className="w-5 h-5 mr-3" /> Launch Toolbox
           </Button>
           <Button href="/games" variant="outline" className="h-14 px-10 text-base border-white/10 hover:border-white/40 hover:bg-white/5">
@@ -118,7 +118,7 @@ const Home = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-8">
-              <Button href="mailto:sohamd008@gmail.com" variant="primary" className="h-16 px-10 text-lg shadow-gold-glow">
+              <Button href="mailto:admin@soham.eu.cc" variant="primary" className="h-16 px-10 text-lg shadow-gold-glow">
                 <Mail className="w-5 h-5 mr-4" />
                 Connectivity
               </Button>

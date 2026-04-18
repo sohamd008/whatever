@@ -14,6 +14,7 @@ import Base64Tool from './Base64Tool';
 import RegexTester from './RegexTester';
 import HashGenerator from './HashGenerator';
 import LoremIpsum from './LoremIpsum';
+import JwtDecoder from './JwtDecoder';
 
 const ToolsDashboard = () => {
   return (
@@ -83,6 +84,9 @@ const ToolsDashboard = () => {
         </div>
         <div id="lorem-ipsum" className="scroll-mt-28">
           <LoremIpsum />
+        </div>
+        <div id="jwt-decoder" className="scroll-mt-28">
+          <JwtDecoder />
         </div>
         <div id="regex-tester" className="scroll-mt-28">
           <RegexTester />
