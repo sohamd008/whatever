@@ -1,8 +1,6 @@
-const CACHE_NAME = 'soham-eu-cc-v2';
+const CACHE_NAME = 'soham-eu-cc-v3';
 const ASSETS_TO_CACHE = [
   '/',
-  '/tools',
-  '/games',
   '/manifest.json',
   '/favicon.svg',
   '/og-image.svg',
@@ -38,11 +36,17 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
           return response;
         })
-        .catch(async () => (await caches.match(request)) || caches.match('/offline.html'))
+        .catch(async () => {
+          const cachedResponse = await caches.match(request);
+          if (cachedResponse) return cachedResponse;
+          return caches.match('/offline.html');
+        })
     );
     return;
   }
@@ -53,9 +57,13 @@ self.addEventListener('fetch', (event) => {
         if (cached) return cached;
 
         return fetch(request).then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          if (response && response.status === 200 && response.type !== 'opaque') {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
           return response;
+        }).catch(() => {
+          // Ignore failures for non-navigation requests
         });
       })
     );
