@@ -16,7 +16,7 @@ const JwtDecoder = () => {
           return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
       return JSON.parse(jsonPayload);
-    } catch (e) {
+    } catch {
       throw new Error('Failed to decode JWT');
     }
   };

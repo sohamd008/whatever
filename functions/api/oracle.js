@@ -22,7 +22,7 @@ export async function onRequestPost({ request, env }) {
     return new Response(JSON.stringify({ response: response.response }), {
       headers: { 'Content-Type': 'application/json' }
     });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: "CRITICAL: Neural sync failure. Check connection parameters." }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' }

@@ -40,7 +40,7 @@ const TheOracle = () => {
       } else {
         setMessages(prev => [...prev, { role: 'oracle', text: data.response }]);
       }
-    } catch (err) {
+    } catch {
       setMessages(prev => [...prev, { role: 'oracle', text: "CRITICAL NETWORK FAILURE. EDGE OF VOID REACHED.", isError: true }]);
     } finally {
       setIsTyping(false);
