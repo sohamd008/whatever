@@ -9,7 +9,7 @@ import TheOracle from '../components/tools/TheOracle.jsx';
   description="Consult The Oracle. An interactive neural net terminal powered by Llama 3 edge compute."
 >
   <main class="flex-grow flex flex-col items-center justify-center container mx-auto max-w-4xl px-6 pt-32 pb-20 min-h-[80vh]">
-    <div class="mb-12 text-center animate-fadeInUp w-full">
+    <div class="mb-12 text-center animate-fade-in-up w-full">
       <h1 class="text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-4 uppercase tracking-tighter">
         The <span class="text-primary text-glow">Oracle</span>
       </h1>
@@ -17,7 +17,7 @@ import TheOracle from '../components/tools/TheOracle.jsx';
         Personal AI Assistant. Awaiting Directives.
       </p>
     </div>
-    <div class="w-full animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;">
+    <div class="w-full animate-fade-in-up" style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;">
       <TheOracle client:only="react" />
     </div>
   </main>

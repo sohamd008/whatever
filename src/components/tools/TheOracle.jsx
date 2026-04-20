@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { TerminalSquare, Send, Cpu } from 'lucide-react';
+import { TerminalSquare, Send, Cpu, RefreshCw } from 'lucide-react';
 
 const TheOracle = () => {
   const [input, setInput] = useState('');
@@ -47,13 +47,28 @@ const TheOracle = () => {
     }
   };
 
+  const handleReset = () => {
+    setMessages([
+      { role: 'oracle', text: "CONNECTION ESTABLISHED.\nI AM THE ORACLE.\n\nAWAITING YOUR QUERY." }
+    ]);
+  };
+
   return (
     <div className="h-[500px] w-full glass-card relative overflow-hidden group flex flex-col">
-      <div className="border-b border-white/[0.06] bg-white/[0.02] px-6 py-4 flex-shrink-0 backdrop-blur-xl">
-        <h2 className="flex items-center gap-2 text-tertiary text-glow font-mono uppercase tracking-widest text-sm m-0">
-          <Cpu className="w-5 h-5 text-tertiary" /> The Oracle [AI]
-        </h2>
-        <p className="text-[10px] text-tertiary/50 font-mono mt-2 mb-0 uppercase tracking-widest">Powered by Llama-3 Edge Compute</p>
+      <div className="border-b border-white/[0.06] bg-white/[0.02] px-6 py-4 flex-shrink-0 backdrop-blur-xl flex justify-between items-center">
+        <div>
+          <h2 className="flex items-center gap-2 text-tertiary text-glow font-mono uppercase tracking-widest text-sm m-0">
+            <Cpu className="w-5 h-5 text-tertiary" /> The Oracle [AI]
+          </h2>
+          <p className="text-[10px] text-tertiary/50 font-mono mt-2 mb-0 uppercase tracking-widest">Powered by Llama-3 Edge Compute</p>
+        </div>
+        <button 
+          onClick={handleReset}
+          className="p-2 text-tertiary/50 hover:text-tertiary hover:bg-tertiary/10 rounded-lg transition-all"
+          title="Clear Chat"
+        >
+          <RefreshCw className="w-4 h-4" />
+        </button>
       </div>
       
       <div className="flex-grow flex flex-col p-0 overflow-hidden relative">
