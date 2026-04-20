@@ -43,23 +43,27 @@ const Home = () => {
         </div>
 
         {/* Scannable Feature Grid */}
-        <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
+        <div className="mt-24 grid grid-cols-2 md:grid-cols-5 gap-4 w-full">
+            <a href="/tools#url-shortener" className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card transition-all hover:scale-105">
                 <Zap className="w-5 h-5 text-primary" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">URL Shortener</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
+            </a>
+            <a href="/tools#notepad" className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card transition-all hover:scale-105">
                 <FileText className="w-5 h-5 text-tertiary" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Local Notes</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
+            </a>
+            <a href="/tools#color-tools" className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card transition-all hover:scale-105">
                 <Palette className="w-5 h-5 text-primary" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Color Tools</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card">
+            </a>
+            <a href="/terminal" className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card transition-all hover:scale-105">
                 <Terminal className="w-5 h-5 text-tertiary" />
                 <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">Link Console</span>
-            </div>
+            </a>
+            <a href="/oracle" className="flex flex-col items-center gap-2 p-5 rounded-2xl glass-card transition-all hover:scale-105 border-tertiary/20">
+                <Cpu className="w-5 h-5 text-tertiary" />
+                <span className="text-[10px] font-mono uppercase tracking-widest text-muted/60">The Oracle</span>
+            </a>
         </div>
       </main>
 

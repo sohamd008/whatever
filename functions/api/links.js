@@ -13,7 +13,8 @@ const listAllKeys = async (namespace) => {
   let cursor;
 
   do {
-    const page = await namespace.list({ cursor });
+    const options = cursor ? { cursor } : {};
+    const page = await namespace.list(options);
     keys.push(...page.keys);
     cursor = page.list_complete ? undefined : page.cursor;
   } while (cursor);
